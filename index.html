@@ -59,16 +59,17 @@
             );
         };
 
-        const FlashcardItem = ({ english, chinese, description, imagePlaceholder }) => (
+        // Updated FlashcardItem: removed imageUrl prop and logic for displaying images.
+        const FlashcardItem = ({ english, chinese, pinyin, description }) => (
             <li className="flex items-center p-3 bg-gray-50 rounded-lg mb-2 last:mb-0 shadow-sm">
-                {imagePlaceholder && (
-                    <div className="w-16 h-16 bg-gray-200 rounded-md flex items-center justify-center text-gray-400 text-xs mr-4 flex-shrink-0">
-                        图片占位
-                    </div>
-                )}
+                {/* Image slot removed as per request */}
+                <div className="w-16 h-16 bg-gray-200 rounded-md flex items-center justify-center text-gray-400 text-xs mr-4 flex-shrink-0">
+                    无图片
+                </div>
                 <div>
                     <p className="font-medium text-gray-900">{english}</p>
                     <p className="text-gray-600">{chinese}</p>
+                    {pinyin && <p className="text-sm text-blue-500 mt-0.5">{pinyin}</p>}
                     {description && <p className="text-sm text-gray-500 mt-1">{description}</p>}
                 </div>
             </li>
@@ -121,6 +122,42 @@
                     >
                         婚礼服饰 (Wedding Attire)
                     </button>
+                    <button
+                        onClick={() => onNavigate('fabrics-materials')}
+                        className="bg-green-600 text-white py-3 px-6 rounded-lg shadow-lg hover:bg-green-700 transition-colors duration-300 text-lg font-semibold"
+                    >
+                        面料与材质 (Fabrics & Materials)
+                    </button>
+                    <button
+                        onClick={() => onNavigate('styles-fashion-trends')}
+                        className="bg-teal-600 text-white py-3 px-6 rounded-lg shadow-lg hover:bg-teal-700 transition-colors duration-300 text-lg font-semibold"
+                    >
+                        风格与流行趋势 (Styles & Fashion Trends)
+                    </button>
+                    <button
+                        onClick={() => onNavigate('pattern')}
+                        className="bg-yellow-600 text-white py-3 px-6 rounded-lg shadow-lg hover:bg-yellow-700 transition-colors duration-300 text-lg font-semibold"
+                    >
+                        图案 (Pattern)
+                    </button>
+                    <button
+                        onClick={() => onNavigate('weaving-method')}
+                        className="bg-orange-600 text-white py-3 px-6 rounded-lg shadow-lg hover:bg-orange-700 transition-colors duration-300 text-lg font-semibold"
+                    >
+                        编织方法 (Weaving Method)
+                    </button>
+                    <button
+                        onClick={() => onNavigate('fit-type')}
+                        className="bg-red-600 text-white py-3 px-6 rounded-lg shadow-lg hover:bg-red-700 transition-colors duration-300 text-lg font-semibold"
+                    >
+                        版型 (Fit Type)
+                    </button>
+                    <button
+                        onClick={() => onNavigate('operation-instruction')}
+                        className="bg-indigo-600 text-white py-3 px-6 rounded-lg shadow-lg hover:bg-indigo-700 transition-colors duration-300 text-lg font-semibold"
+                    >
+                        操作说明 (Operation Instruction)
+                    </button>
                 </div>
             </div>
         );
@@ -133,21 +170,37 @@
                 </p>
                 <SubcategoryItem title="通用尺码 (General Sizes)">
                     <ul className="space-y-2">
-                        <FlashcardItem english="XS (Extra Small)" chinese="超小码" />
-                        <FlashcardItem english="S (Small)" chinese="小码" />
-                        <FlashcardItem english="M (Medium)" chinese="中码" />
-                        <FlashcardItem english="L (Large)" chinese="大码" />
-                        <FlashcardItem english="XL (Extra Large)" chinese="超大码" />
-                        <FlashcardItem english="XXL / 2XL (Double Extra Large)" chinese="双超大码" />
-                        <FlashcardItem english="XXXL / 3XL (Triple Extra Large)" chinese="三超大码" />
-                        <FlashcardItem english="One Size / Free Size" chinese="均码" />
-                        <FlashcardItem english="Custom Size" chinese="定制尺码" />
+                        <FlashcardItem english="XS (Extra Small)" chinese="超小码" pinyin="chāo xiǎo mǎ" />
+                        <FlashcardItem english="S (Small)" chinese="小码" pinyin="xiǎo mǎ" />
+                        <FlashcardItem english="M (Medium)" chinese="中码" pinyin="zhōng mǎ" />
+                        <FlashcardItem english="L (Large)" chinese="大码" pinyin="dà mǎ" />
+                        <FlashcardItem english="XL (Extra Large)" chinese="超大码" pinyin="chāo dà mǎ" />
+                        <FlashcardItem english="XXL / 2XL (Double Extra Large)" chinese="双超大码" pinyin="shuāng chāo dà mǎ" />
+                        <FlashcardItem english="XXXL / 3XL (Triple Extra Large)" chinese="三超大码" pinyin="sān chāo dà mǎ" />
+                        <FlashcardItem english="One Size / Free Size" chinese="均码" pinyin="jūn mǎ" />
+                        <FlashcardItem english="Custom Size" chinese="定制尺码" pinyin="dìng zhì chǐ mǎ" />
                     </ul>
                 </SubcategoryItem>
                 <SubcategoryItem title="按体型选购 (Shop by Body Type)">
                     <ul className="space-y-2">
-                        <FlashcardItem english="Petite" chinese="小码" imagePlaceholder={true} />
-                        <FlashcardItem english="Hourglass" chinese="沙漏型" imagePlaceholder={true} />
+                        <FlashcardItem english="Petite" chinese="小码" pinyin="xiǎo mǎ" />
+                        <FlashcardItem english="Hourglass" chinese="沙漏型" pinyin="shā lòu xíng" />
+                    </ul>
+                </SubcategoryItem>
+                <SubcategoryItem title="内衣尺码 (Underwear Sizes)">
+                    <ul className="space-y-2">
+                        <FlashcardItem english="Bra Size" chinese="文胸尺码" pinyin="wén xiōng chǐ mǎ" description="e.g., 32A, 34B, 75C" />
+                        <FlashcardItem english="Cup Size" chinese="罩杯尺码" pinyin="zhào bēi chǐ mǎ" description="e.g., A, B, C, D" />
+                        <FlashcardItem english="Underbust Measurement" chinese="下胸围" pinyin="xià xiōng wéi" />
+                        <FlashcardItem english="Bust Measurement" chinese="胸围" pinyin="xiōng wéi" />
+                        <FlashcardItem english="Panties Size" chinese="内裤尺码" pinyin="nèi kù chǐ mǎ" description="e.g., S, M, L, XL" />
+                    </ul>
+                </SubcategoryItem>
+                <SubcategoryItem title="裤子尺码 (Pants Sizes)">
+                    <ul className="space-y-2">
+                        <FlashcardItem english="Waist Size" chinese="腰围" pinyin="yāo wéi" />
+                        <FlashcardItem english="Inseam" chinese="内缝长" pinyin="nèi féng cháng" />
+                        <FlashcardItem english="Hip Size" chinese="臀围" pinyin="tún wéi" />
                     </ul>
                 </SubcategoryItem>
             </CategoryCard>
@@ -158,66 +211,66 @@
                 <SubcategoryItem title="中性服装 (Unisex Apparel)">
                     <SubcategoryItem title="上装 (Tops)">
                         <ul className="space-y-2">
-                            <FlashcardItem english="T-shirts/Short Sleeves" chinese="T恤/短袖" imagePlaceholder={true} />
-                            <FlashcardItem english="Hoodies/Sweatshirts" chinese="卫衣" imagePlaceholder={true} />
-                            <FlashcardItem english="Shirts" chinese="衬衫" imagePlaceholder={true} />
-                            <FlashcardItem english="Sweaters/Knitwear" chinese="毛衣" imagePlaceholder={true} />
-                            <FlashcardItem english="Polos" chinese="马球衫" imagePlaceholder={true} />
+                            <FlashcardItem english="T-shirts/Short Sleeves" chinese="T恤/短袖" pinyin="T xù / duǎn xiù" />
+                            <FlashcardItem english="Hoodies/Sweatshirts" chinese="卫衣" pinyin="wèi yī" />
+                            <FlashcardItem english="Shirts" chinese="衬衫" pinyin="chèn shān" />
+                            <FlashcardItem english="Sweaters/Knitwear" chinese="毛衣" pinyin="máo yī" />
+                            <FlashcardItem english="Polos" chinese="马球衫" pinyin="mǎ qiú shān" />
                         </ul>
                     </SubcategoryItem>
                     <SubcategoryItem title="下装 (Bottoms)">
                         <ul className="space-y-2">
-                            <FlashcardItem english="Pants/Trousers" chinese="长裤" imagePlaceholder={true} />
-                            <FlashcardItem english="Jeans" chinese="牛仔裤" imagePlaceholder={true} />
-                            <FlashcardItem english="Shorts" chinese="短裤" imagePlaceholder={true} />
-                            <FlashcardItem english="Denim Shorts" chinese="牛仔短裤" imagePlaceholder={true} />
-                            <FlashcardItem english="Cargo Pants" chinese="工装裤" imagePlaceholder={true} />
-                            <FlashcardItem english="Straight Leg Pants" chinese="直筒裤" imagePlaceholder={true} />
-                            <FlashcardItem english="Skinny Pants" chinese="紧身裤" imagePlaceholder={true} />
-                            <FlashcardItem english="Flare/Wide Leg Pants" chinese="阔腿裤" imagePlaceholder={true} />
-                            <FlashcardItem english="Bootcut Pants" chinese="微喇裤" imagePlaceholder={true} />
-                            <FlashcardItem english="Sweatpants" chinese="运动裤" imagePlaceholder={true} />
-                            <FlashcardItem english="Suit Pants" chinese="西装裤" imagePlaceholder={true} />
+                            <FlashcardItem english="Pants/Trousers" chinese="长裤" pinyin="cháng kù" />
+                            <FlashcardItem english="Jeans" chinese="牛仔裤" pinyin="niú zǎi kù" />
+                            <FlashcardItem english="Shorts" chinese="短裤" pinyin="duǎn kù" />
+                            <FlashcardItem english="Denim Shorts" chinese="牛仔短裤" pinyin="niú zǎi duǎn kù" />
+                            <FlashcardItem english="Cargo Pants" chinese="工装裤" pinyin="gōng zhuāng kù" />
+                            <FlashcardItem english="Straight Leg Pants" chinese="直筒裤" pinyin="zhí tǒng kù" />
+                            <FlashcardItem english="Skinny Pants" chinese="紧身裤" pinyin="jǐn shēn kù" />
+                            <FlashcardItem english="Flare/Wide Leg Pants" chinese="阔腿裤" pinyin="kuò tuǐ kù" />
+                            <FlashcardItem english="Bootcut Pants" chinese="微喇裤" pinyin="wēi lǎ kù" />
+                            <FlashcardItem english="Sweatpants" chinese="运动裤" pinyin="yùn dòng kù" />
+                            <FlashcardItem english="Suit Pants" chinese="西装裤" pinyin="xī zhuāng kù" />
                         </ul>
                     </SubcategoryItem>
                     <SubcategoryItem title="外套 (Outerwear)">
                         <ul className="space-y-2">
-                            <FlashcardItem english="Jackets" chinese="夹克" imagePlaceholder={true} />
-                            <FlashcardItem english="Coats" chinese="大衣" imagePlaceholder={true} />
-                            <FlashcardItem english="Denim Jackets & Coats" chinese="牛仔夹克和外套" imagePlaceholder={true} />
-                            <FlashcardItem english="Blazers/Suit Jackets" chinese="西装外套" imagePlaceholder={true} />
-                            <FlashcardItem english="Trench Coat" chinese="风衣" imagePlaceholder={true} />
-                            <FlashcardItem english="Fleece Coat" chinese="摇粒绒外套" imagePlaceholder={true} />
-                            <FlashcardItem english="Down Coat" chinese="羽绒服" imagePlaceholder={true} />
-                            <FlashcardItem english="Puffer Coat" chinese="棉服" imagePlaceholder={true} />
+                            <FlashcardItem english="Jackets" chinese="夹克" pinyin="jiá kè" />
+                            <FlashcardItem english="Coats" chinese="大衣" pinyin="dà yī" />
+                            <FlashcardItem english="Denim Jackets & Coats" chinese="牛仔夹克和外套" pinyin="niú zǎi jiá kè hé wài tào" />
+                            <FlashcardItem english="Blazers/Suit Jackets" chinese="西装外套" pinyin="xī zhuāng wài tào" />
+                            <FlashcardItem english="Trench Coat" chinese="风衣" pinyin="fēng yī" />
+                            <FlashcardItem english="Fleece Coat" chinese="摇粒绒外套" pinyin="yáo lì róng wài tào" />
+                            <FlashcardItem english="Down Coat" chinese="羽绒服" pinyin="yǔ róng fú" />
+                            <FlashcardItem english="Puffer Coat" chinese="棉服" pinyin="mián fú" />
                         </ul>
                     </SubcategoryItem>
                     <SubcategoryItem title="运动休闲服 (Activewear / Sportswear)">
                         <ul className="space-y-2">
-                            <FlashcardItem english="Sports Tops" chinese="运动上衣" imagePlaceholder={true} />
-                            <FlashcardItem english="Sports Bottoms" chinese="运动裤" imagePlaceholder={true} />
-                            <FlashcardItem english="Outdoor Jackets" chinese="户外夹克" imagePlaceholder={true} />
-                            <FlashcardItem english="Activewear Sets" chinese="运动套装" imagePlaceholder={true} />
-                            <FlashcardItem english="Activewear Hoodies/Sweatshirts" chinese="运动休闲卫衣" imagePlaceholder={true} />
+                            <FlashcardItem english="Sports Tops" chinese="运动上衣" pinyin="yùn dòng shàng yī" />
+                            <FlashcardItem english="Sports Bottoms" chinese="运动裤" pinyin="yùn dòng kù" />
+                            <FlashcardItem english="Outdoor Jackets" chinese="户外夹克" pinyin="hù wài jiá kè" />
+                            <FlashcardItem english="Activewear Sets" chinese="运动套装" pinyin="yùn dòng tào zhuāng" />
+                            <FlashcardItem english="Activewear Hoodies/Sweatshirts" chinese="运动休闲卫衣" pinyin="yùn dòng xiū xián wèi yī" />
                         </ul>
                     </SubcategoryItem>
                     <ul className="space-y-2 mt-2">
-                        <FlashcardItem english="Sleepwear/Pajamas" chinese="睡衣" imagePlaceholder={true} />
-                        <FlashcardItem english="Loungewear" chinese="家居服" imagePlaceholder={true} />
-                        <FlashcardItem english="Workwear" chinese="工作服" imagePlaceholder={true} />
-                        <FlashcardItem english="Swimwear" chinese="泳衣" imagePlaceholder={true} />
+                        <FlashcardItem english="Sleepwear/Pajamas" chinese="睡衣" pinyin="shuì yī" />
+                        <FlashcardItem english="Loungewear" chinese="家居服" pinyin="jiā jū fú" />
+                        <FlashcardItem english="Workwear" chinese="工作服" pinyin="gōng zuò fú" />
+                        <FlashcardItem english="Swimwear" chinese="泳衣" pinyin="yǒng yī" />
                     </ul>
                     <SubcategoryItem title="大码服装 (Plus Size Apparel)">
                         <ul className="space-y-2">
-                            <FlashcardItem english="Plus Size Tops" chinese="大码上衣" imagePlaceholder={true} />
-                            <FlashcardItem english="Plus Size Bottoms" chinese="大码下装" imagePlaceholder={true} />
-                            <FlashcardItem english="Plus Size Outerwear" chinese="大码外套" imagePlaceholder={true} />
+                            <FlashcardItem english="Plus Size Tops" chinese="大码上衣" pinyin="dà mǎ shàng yī" />
+                            <FlashcardItem english="Plus Size Bottoms" chinese="大码下装" pinyin="dà mǎ xià zhuāng" />
+                            <FlashcardItem english="Plus Size Outerwear" chinese="大码外套" pinyin="dà mǎ wài tào" />
                         </ul>
                     </SubcategoryItem>
                     <SubcategoryItem title="制服 (Uniforms)">
                         <ul className="space-y-2">
-                            <FlashcardItem english="School Uniforms" chinese="学校制服" imagePlaceholder={true} />
-                            <FlashcardItem english="Nurse Uniforms" chinese="护士制服" imagePlaceholder={true} />
+                            <FlashcardItem english="School Uniforms" chinese="学校制服" pinyin="xué xiào zhì fú" />
+                            <FlashcardItem english="Nurse Uniforms" chinese="护士制服" pinyin="hù shì zhì fú" />
                         </ul>
                     </SubcategoryItem>
                 </SubcategoryItem>
@@ -227,176 +280,176 @@
                         <SubcategoryItem title="按款式 (By Style)">
                             <SubcategoryItem title="衬衫 (Shirts/Blouses)">
                                 <ul className="space-y-2">
-                                    <FlashcardItem english="Office Blouses" chinese="通勤衬衫" imagePlaceholder={true} />
-                                    <FlashcardItem english="French Style" chinese="法式衬衫" imagePlaceholder={true} />
-                                    <FlashcardItem english="Designer Details" chinese="设计感衬衫" imagePlaceholder={true} />
-                                    <FlashcardItem english="Chinese Frog-Button Blouse" chinese="中式盘扣衬衫" imagePlaceholder={true} />
+                                    <FlashcardItem english="Office Blouses" chinese="通勤衬衫" pinyin="tōng qín chèn shān" />
+                                    <FlashcardItem english="French Style" chinese="法式衬衫" pinyin="fǎ shì chèn shān" />
+                                    <FlashcardItem english="Designer Details" chinese="设计感衬衫" pinyin="shè jì gǎn chèn shān" />
+                                    <FlashcardItem english="Chinese Frog-Button Blouse" chinese="中式盘扣衬衫" pinyin="zhōng shì pán kòu chèn shān" />
                                 </ul>
                             </SubcategoryItem>
                             <SubcategoryItem title="T恤 (T-shirts)">
                                 <ul className="space-y-2">
-                                    <FlashcardItem english="Solid Color" chinese="纯色T恤" imagePlaceholder={true} />
-                                    <FlashcardItem english="Printed" chinese="印花T恤" imagePlaceholder={true} />
-                                    <FlashcardItem english="Fitted" chinese="修身款" imagePlaceholder={true} />
+                                    <FlashcardItem english="Solid Color" chinese="纯色T恤" pinyin="chún sè T xù" />
+                                    <FlashcardItem english="Printed" chinese="印花T恤" pinyin="yìn huā T xù" />
+                                    <FlashcardItem english="Fitted" chinese="修身款" pinyin="xiū shēn kuǎn" />
                                 </ul>
                             </SubcategoryItem>
                             <SubcategoryItem title="针织衫 (Knitwear)">
                                 <ul className="space-y-2">
-                                    <FlashcardItem english="Retro Cardigans" chinese="奶奶衫" imagePlaceholder={true} />
-                                    <FlashcardItem english="Open Front" chinese="开衫" imagePlaceholder={true} />
-                                    <FlashcardItem english="Pullovers" chinese="套头针织" imagePlaceholder={true} />
-                                    <FlashcardItem english="Knit Sweater Vest" chinese="针织背心" imagePlaceholder={true} />
-                                    <FlashcardItem english="Argyle Pattern Vest" chinese="菱格背心" imagePlaceholder={true} />
+                                    <FlashcardItem english="Retro Cardigans" chinese="奶奶衫" pinyin="nǎi nɑi shān" />
+                                    <FlashcardItem english="Open Front" chinese="开衫" pinyin="kāi shān" />
+                                    <FlashcardItem english="Pullovers" chinese="套头针织" pinyin="tào tóu zhēn zhī" />
+                                    <FlashcardItem english="Knit Sweater Vest" chinese="针织背心" pinyin="zhēn zhī bèi xīn" />
+                                    <FlashcardItem english="Argyle Pattern Vest" chinese="菱格背心" pinyin="líng gé bèi xīn" />
                                 </ul>
                             </SubcategoryItem>
                             <SubcategoryItem title="罩衫/小衫 (Tunics & Casual Tops)">
                                 <SubcategoryItem title="雪纺罩衫 (Chiffon Tops)">
                                     <ul className="space-y-2">
-                                        <FlashcardItem english="Halter Off-Shoulder Chiffon Top" chinese="挂脖露肩雪纺衫" imagePlaceholder={true} />
-                                        <FlashcardItem english="Sleeveless Chiffon Blouse" chinese="无袖雪纺衬衫" imagePlaceholder={true} />
+                                        <FlashcardItem english="Halter Off-Shoulder Chiffon Top" chinese="挂脖露肩雪纺衫" pinyin="guà bó lù jiān xuě fǎng shān" />
+                                        <FlashcardItem english="Sleeveless Chiffon Blouse" chinese="无袖雪纺衬衫" pinyin="wú xiù xuě fǎng chèn shān" />
                                     </ul>
                                 </SubcategoryItem>
                                 <ul className="space-y-2 mt-2">
-                                    <FlashcardItem english="Embroidered" chinese="刺绣小衫" imagePlaceholder={true} />
+                                    <FlashcardItem english="Embroidered" chinese="刺绣小衫" pinyin="cì xiù xiǎo shān" />
                                 </ul>
                             </SubcategoryItem>
                         </SubcategoryItem>
                         <SubcategoryItem title="按功能场景 (By Occasion)">
                             <SubcategoryItem title="通勤职场 (Workwear)">
                                 <ul className="space-y-2">
-                                    <FlashcardItem english="Suit Blouses" chinese="西装衬衫" imagePlaceholder={true} />
-                                    <FlashcardItem english="Minimalist Basics" chinese="简约基础款" imagePlaceholder={true} />
+                                    <FlashcardItem english="Suit Blouses" chinese="西装衬衫" pinyin="xī zhuāng chèn shān" />
+                                    <FlashcardItem english="Minimalist Basics" chinese="简约基础款" pinyin="jiǎn yuē jī chǔ kuǎn" />
                                 </ul>
                             </SubcategoryItem>
                             <SubcategoryItem title="度假风 (Vacation)">
                                 <ul className="space-y-2">
-                                    <FlashcardItem english="Off-Shoulder" chinese="露肩款" imagePlaceholder={true} />
-                                    <FlashcardItem english="Boho" chinese="波西米亚风" imagePlaceholder={true} />
+                                    <FlashcardItem english="Off-Shoulder" chinese="露肩款" pinyin="lù jiān kuǎn" />
+                                    <FlashcardItem english="Boho" chinese="波西米亚风" pinyin="bō xī mǐ yà fēng" />
                                 </ul>
                             </SubcategoryItem>
                             <SubcategoryItem title="日常休闲 (Casual)">
                                 <ul className="space-y-2">
-                                    <FlashcardItem english="Loungewear Tops" chinese="居家服" imagePlaceholder={true} />
-                                    <FlashcardItem english="Versatile Basics" chinese="百搭基础款" imagePlaceholder={true} />
+                                    <FlashcardItem english="Loungewear Tops" chinese="居家服" pinyin="jū jiā fú" />
+                                    <FlashcardItem english="Versatile Basics" chinese="百搭基础款" pinyin="bǎi dā jī chǔ kuǎn" />
                                 </ul>
                             </SubcategoryItem>
                         </SubcategoryItem>
                         <SubcategoryItem title="按设计元素 (By Design Feature)">
                             <SubcategoryItem title="领型 (Necklines)">
                                 <ul className="space-y-2">
-                                    <FlashcardItem english="V-Neck" chinese="V领" imagePlaceholder={true} />
-                                    <FlashcardItem english="Square Neck" chinese="方领" imagePlaceholder={true} />
-                                    <FlashcardItem english="Turtleneck" chinese="高领" imagePlaceholder={true} />
-                                    <FlashcardItem english="High Neck/Turtleneck" chinese="高领/堆堆领" imagePlaceholder={true} />
-                                    <FlashcardItem english="Shawl Collar" chinese="西装领" imagePlaceholder={true} />
+                                    <FlashcardItem english="V-Neck" chinese="V领" pinyin="V lǐng" />
+                                    <FlashcardItem english="Square Neck" chinese="方领" pinyin="fāng lǐng" />
+                                    <FlashcardItem english="Turtleneck" chinese="高领" pinyin="gāo lǐng" />
+                                    <FlashcardItem english="High Neck/Turtleneck" chinese="高领/堆堆领" pinyin="gāo lǐng / duī duī lǐng" />
+                                    <FlashcardItem english="Shawl Collar" chinese="西装领" pinyin="xī zhuāng lǐng" />
                                 </ul>
                             </SubcategoryItem>
                             <SubcategoryItem title="袖型 (Sleeves)">
                                 <ul className="space-y-2">
-                                    <FlashcardItem english="Puff Sleeves" chinese="泡泡袖" imagePlaceholder={true} />
-                                    <FlashcardItem english="Bell Sleeves" chinese="喇叭袖" imagePlaceholder={true} />
-                                    <FlashcardItem english="Sleeveless" chinese="无袖" imagePlaceholder={true} />
-                                    <FlashcardItem english="Flounce Sleeve" chinese="喇叭袖" imagePlaceholder={true} />
-                                    <FlashcardItem english="Batwing" chinese="蝙蝠袖" imagePlaceholder={true} />
-                                    <FlashcardItem english="Lantern Sleeve" chinese="灯笼袖" imagePlaceholder={true} />
-                                    <FlashcardItem english="Cloak Sleeve" chinese="斗蓬袖" imagePlaceholder={true} />
+                                    <FlashcardItem english="Puff Sleeves" chinese="泡泡袖" pinyin="pào pào xiù" />
+                                    <FlashcardItem english="Bell Sleeves" chinese="喇叭袖" pinyin="lǎ bɑ xiù" />
+                                    <FlashcardItem english="Sleeveless" chinese="无袖" pinyin="wú xiù" />
+                                    <FlashcardItem english="Flounce Sleeve" chinese="喇叭袖" pinyin="lǎ bɑ xiù" />
+                                    <FlashcardItem english="Batwing" chinese="蝙蝠袖" pinyin="biān fú xiù" />
+                                    <FlashcardItem english="Lantern Sleeve" chinese="灯笼袖" pinyin="dēng lóng xiù" />
+                                    <FlashcardItem english="Cloak Sleeve" chinese="斗蓬袖" pinyin="dòu péng xiù" />
                                 </ul>
                             </SubcategoryItem>
                             <SubcategoryItem title="流行元素 (Trend Details)">
                                 <ul className="space-y-2">
-                                    <FlashcardItem english="Lace Trim" chinese="蕾丝边" imagePlaceholder={true} />
-                                    <FlashcardItem english="Ruffle" chinese="荷叶边" imagePlaceholder={true} />
-                                    <FlashcardItem english="Bow Knot" chinese="蝴蝶结" imagePlaceholder={true} />
+                                    <FlashcardItem english="Lace Trim" chinese="蕾丝边" pinyin="lěi sī biān" />
+                                    <FlashcardItem english="Ruffle" chinese="荷叶边" pinyin="hé yè biān" />
+                                    <FlashcardItem english="Bow Knot" chinese="蝴蝶结" pinyin="hú dié jié" />
                                 </ul>
                             </SubcategoryItem>
                         </SubcategoryItem>
                         <SubcategoryItem title="季节专属 (Seasonal)">
                             <SubcategoryItem title="夏季清凉款 (Summer)">
                                 <ul className="space-y-2">
-                                    <FlashcardItem english="UV Protection" chinese="防晒衫" imagePlaceholder={true} />
-                                    <FlashcardItem english="Strappy Tanks" chinese="吊带背心" imagePlaceholder={true} />
+                                    <FlashcardItem english="UV Protection" chinese="防晒衫" pinyin="fáng shài shān" />
+                                    <FlashcardItem english="Strappy Tanks" chinese="吊带背心" pinyin="diào dài bèi xīn" />
                                 </ul>
                             </SubcategoryItem>
                             <SubcategoryItem title="冬季保暖款 (Winter)">
                                 <ul className="space-y-2">
-                                    <FlashcardItem english="Fleece-Lined" chinese="加绒打底衫" imagePlaceholder={true} />
-                                    <FlashcardItem english="Winter Knits" chinese="高领毛衣" imagePlaceholder={true} />
+                                    <FlashcardItem english="Fleece-Lined" chinese="加绒打底衫" pinyin="jiā róng dǎ dǐ shān" />
+                                    <FlashcardItem english="Winter Knits" chinese="高领毛衣" pinyin="gāo lǐng máo yī" />
                                 </ul>
                             </SubcategoryItem>
                         </SubcategoryItem>
                         <ul className="space-y-2 mt-2">
-                            <FlashcardItem english="Tank Top" chinese="背心" imagePlaceholder={true} />
-                            <FlashcardItem english="Tube Top" chinese="抹胸" imagePlaceholder={true} />
-                            <FlashcardItem english="Crop Tee" chinese="短款上衣" imagePlaceholder={true} />
-                            <FlashcardItem english="One Shoulder" chinese="单肩上衣" imagePlaceholder={true} />
-                            <FlashcardItem english="Halter Neck Top" chinese="挂脖上衣" imagePlaceholder={true} />
-                            <FlashcardItem english="Crop Blazer" chinese="短款西装外套" imagePlaceholder={true} />
+                            <FlashcardItem english="Tank Top" chinese="背心" pinyin="bèi xīn" />
+                            <FlashcardItem english="Tube Top" chinese="抹胸" pinyin="mǒ xiōng" />
+                            <FlashcardItem english="Crop Tee" chinese="短款上衣" pinyin="duǎn kuǎn shàng yī" />
+                            <FlashcardItem english="One Shoulder" chinese="单肩上衣" pinyin="dān jiān shàng yī" />
+                            <FlashcardItem english="Halter Neck Top" chinese="挂脖上衣" pinyin="guà bó shàng yī" />
+                            <FlashcardItem english="Crop Blazer" chinese="短款西装外套" pinyin="duǎn kuǎn xī zhuāng wài tào" />
                         </ul>
                     </SubcategoryItem>
                     <SubcategoryItem title="下装 (Bottoms)">
                         <ul className="space-y-2">
-                            <FlashcardItem english="Leggings/Tights" chinese="紧身裤" imagePlaceholder={true} />
-                            <FlashcardItem english="Yoga Pants" chinese="瑜伽裤" imagePlaceholder={true} />
+                            <FlashcardItem english="Leggings/Tights" chinese="紧身裤" pinyin="jǐn shēn kù" />
+                            <FlashcardItem english="Yoga Pants" chinese="瑜伽裤" pinyin="yú jiā kù" />
                         </ul>
                         <SubcategoryItem title="裙子 (Skirts)">
                             <ul className="space-y-2">
-                                <FlashcardItem english="A-line Skirt" chinese="A字裙" description="Narrow at waist, flares gently to hem" imagePlaceholder={true} />
-                                <FlashcardItem english="Pencil Skirt" chinese="铅笔裙" description="Slim-fitting, straight or tapered" imagePlaceholder={true} />
-                                <FlashcardItem english="Wrap Skirt" chinese="裹身裙 / 裹裙" description="Wraps around the waist, often with tie" imagePlaceholder={true} />
-                                <FlashcardItem english="Mini Skirt" chinese="超短裙" description="Hemline above mid-thigh" imagePlaceholder={true} />
-                                <FlashcardItem english="Midi Skirt" chinese="中长裙" description="Hemline falls below the knee, above ankle" imagePlaceholder={true} />
-                                <FlashcardItem english="Maxi Skirt" chinese="长裙" description="Full-length, reaching ankle or floor" imagePlaceholder={true} />
-                                <FlashcardItem english="Circle Skirt" chinese="圆裙" description="Cut in a circle, flared and voluminous" imagePlaceholder={true} />
-                                <FlashcardItem english="Tulip Skirt" chinese="郁金香裙" description="Overlapping panels, wider at hips" imagePlaceholder={true} />
-                                <FlashcardItem english="Skater Skirt" chinese="滑冰裙" description="Short, flared, often A-line or circle style" imagePlaceholder={true} />
-                                <FlashcardItem english="Tiered Skirt" chinese="层层裙 / 分层裙" description="Made of gathered layers" imagePlaceholder={true} />
-                                <FlashcardItem english="Balloon/Bubble Skirt" chinese="泡泡裙" description="Hem folded under, puffed-out shape" imagePlaceholder={true} />
-                                <FlashcardItem english="Godet Skirt" chinese="插片裙" description="Inserts (godets) for extra flare" imagePlaceholder={true} />
-                                <FlashcardItem english="Asymmetrical Skirt" chinese="不对称裙" description="Uneven hemline, modern style" imagePlaceholder={true} />
-                                <FlashcardItem english="Panel Skirt" chinese="拼接裙" description="Constructed with visible panels" imagePlaceholder={true} />
-                                <FlashcardItem english="Pleated Skirt" chinese="百褶裙" imagePlaceholder={true} />
-                                <FlashcardItem english="Mermaid Hem Skirt" chinese="鱼尾半身裙" imagePlaceholder={true} />
-                                <FlashcardItem english="Denim Skirts" chinese="牛仔半裙" imagePlaceholder={true} />
+                                <FlashcardItem english="A-line Skirt" chinese="A字裙" pinyin="A zì qún" description="Narrow at waist, flares gently to hem" />
+                                <FlashcardItem english="Pencil Skirt" chinese="铅笔裙" pinyin="qiān bǐ qún" description="Slim-fitting, straight or tapered" />
+                                <FlashcardItem english="Wrap Skirt" chinese="裹身裙 / 裹裙" pinyin="guǒ shēn qún / guǒ qún" description="Wraps around the waist, often with tie" />
+                                <FlashcardItem english="Mini Skirt" chinese="超短裙" pinyin="chāo duǎn qún" description="Hemline above mid-thigh" />
+                                <FlashcardItem english="Midi Skirt" chinese="中长裙" pinyin="zhōng cháng qún" description="Hemline falls below the knee, above ankle" />
+                                <FlashcardItem english="Maxi Skirt" chinese="长裙" pinyin="cháng qún" description="Full-length, reaching ankle or floor" />
+                                <FlashcardItem english="Circle Skirt" chinese="圆裙" pinyin="yuán qún" description="Cut in a circle, flared and voluminous" />
+                                <FlashcardItem english="Tulip Skirt" chinese="郁金香裙" pinyin="yù jīn xiāng qún" description="Overlapping panels, wider at hips" />
+                                <FlashcardItem english="Skater Skirt" chinese="滑冰裙" pinyin="huá bīng qún" description="Short, flared, often A-line or circle style" />
+                                <FlashcardItem english="Tiered Skirt" chinese="层层裙 / 分层裙" pinyin="céng céng qún / fēn céng qún" description="Made of gathered layers" />
+                                <FlashcardItem english="Balloon/Bubble Skirt" chinese="泡泡裙" pinyin="pào pào qún" description="Hem folded under, puffed-out shape" />
+                                <FlashcardItem english="Godet Skirt" chinese="插片裙" pinyin="chā piàn qún" description="Inserts (godets) for extra flare" />
+                                <FlashcardItem english="Asymmetrical Skirt" chinese="不对称裙" pinyin="bù duì chèn qún" description="Uneven hemline, modern style" />
+                                <FlashcardItem english="Panel Skirt" chinese="拼接裙" pinyin="pīn jiē qún" />
+                                <FlashcardItem english="Pleated Skirt" chinese="百褶裙" pinyin="bǎi zhě qún" />
+                                <FlashcardItem english="Mermaid Hem Skirt" chinese="鱼尾半身裙" pinyin="yú wěi bàn shēn qún" />
+                                <FlashcardItem english="Denim Skirts" chinese="牛仔半裙" pinyin="niú zǎi bàn qún" />
                             </ul>
                         </SubcategoryItem>
                     </SubcategoryItem>
                     <SubcategoryItem title="连衣裙 (Dresses)">
                         <ul className="space-y-2">
-                            <FlashcardItem english="Dresses" chinese="连衣裙" imagePlaceholder={true} />
-                            <FlashcardItem english="Backless Dress" chinese="露背裙" imagePlaceholder={true} />
-                            <FlashcardItem english="Tube Dress" chinese="抹胸裙" imagePlaceholder={true} />
-                            <FlashcardItem english="Bodycon Dress" chinese="紧身裙" imagePlaceholder={true} />
-                            <FlashcardItem english="Halter Neck Skirt" chinese="挂脖裙" imagePlaceholder={true} />
-                            <FlashcardItem english="Ball Gown" chinese="舞会礼服" imagePlaceholder={true} />
-                            <FlashcardItem english="Peplum Dress" chinese="褶边裙" imagePlaceholder={true} />
-                            <FlashcardItem english="Tutu Skirt" chinese="蓬蓬裙" imagePlaceholder={true} />
-                            <FlashcardItem english="Flared Hem Dress" chinese="A字裙" imagePlaceholder={true} />
-                            <FlashcardItem english="Shirt Dress" chinese="衬衫裙" imagePlaceholder={true} />
-                            <FlashcardItem english="Drawstring Dress" chinese="抽绳连衣裙" imagePlaceholder={true} />
-                            <FlashcardItem english="Suit Dress" chinese="西装连衣裙" imagePlaceholder={true} />
+                            <FlashcardItem english="Dresses" chinese="连衣裙" pinyin="lián yī qún" />
+                            <FlashcardItem english="Backless Dress" chinese="露背裙" pinyin="lù bèi qún" />
+                            <FlashcardItem english="Tube Dress" chinese="抹胸裙" pinyin="mǒ xiōng qún" />
+                            <FlashcardItem english="Bodycon Dress" chinese="紧身裙" pinyin="jǐn shēn qún" />
+                            <FlashcardItem english="Halter Neck Skirt" chinese="挂脖裙" pinyin="guà bó qún" />
+                            <FlashcardItem english="Ball Gown" chinese="舞会礼服" pinyin="wǔ huì lǐ fú" />
+                            <FlashcardItem english="Peplum Dress" chinese="褶边裙" pinyin="zhě biān qún" />
+                            <FlashcardItem english="Tutu Skirt" chinese="蓬蓬裙" pinyin="péng péng qún" />
+                            <FlashcardItem english="Flared Hem Dress" chinese="A字裙" pinyin="A zì qún" />
+                            <FlashcardItem english="Shirt Dress" chinese="衬衫裙" pinyin="chèn shān qún" />
+                            <FlashcardItem english="Drawstring Dress" chinese="抽绳连衣裙" pinyin="chōu shéng lián yī qún" />
+                            <FlashcardItem english="Suit Dress" chinese="西装连衣裙" pinyin="xī zhuāng lián yī qún" />
                         </ul>
                     </SubcategoryItem>
                     <ul className="space-y-2 mt-2">
-                        <FlashcardItem english="Jumpsuits/Rompers" chinese="连体裤" imagePlaceholder={true} />
-                        <FlashcardItem english="Maternity Wear" chinese="孕妇装" imagePlaceholder={true} />
+                        <FlashcardItem english="Jumpsuits/Rompers" chinese="连体裤" pinyin="lián tǐ kù" />
+                        <FlashcardItem english="Maternity Wear" chinese="孕妇装" pinyin="yùn fù zhuāng" />
                     </ul>
                     <SubcategoryItem title="特殊场合 / 功能服饰 (Special Occasion / Functional Wear)">
                         <ul className="space-y-2">
-                            <FlashcardItem english="Formalwear / Suits" chinese="礼服 / 正装" description="包括男士西装、女士礼服等" imagePlaceholder={true} />
-                            <FlashcardItem english="Evening Gowns" chinese="晚礼服" description="常用于婚礼、舞会、正式场合" imagePlaceholder={true} />
-                            <FlashcardItem english="Stage / Performance Costumes" chinese="舞台服 / 演出服" description="舞蹈、戏剧、歌唱等场合使用" imagePlaceholder={true} />
-                            <FlashcardItem english="Folk Performance Wear" chinese="民俗表演服" description="舞蹈或文化节庆时穿的民俗服装" imagePlaceholder={true} />
+                            <FlashcardItem english="Formalwear / Suits" chinese="礼服 / 正装" pinyin="lǐ fú / zhèng zhuāng" description="包括男士西装、女士礼服等" />
+                            <FlashcardItem english="Evening Gowns" chinese="晚礼服" pinyin="wǎn lǐ fú" description="常用于婚礼、舞会、正式场合" />
+                            <FlashcardItem english="Stage / Performance Costumes" chinese="舞台服 / 演出服" pinyin="wǔ tái fú / yǎn chū fú" description="舞蹈、戏剧、歌唱等场合使用" />
+                            <FlashcardItem english="Folk Performance Wear" chinese="民俗表演服" pinyin="mín sú biǎo yǎn fú" description="舞蹈或文化节庆时穿的民俗服装" />
                         </ul>
                     </SubcategoryItem>
                     <SubcategoryItem title="按风格选购 (Shop by Style)">
                         <ul className="space-y-2">
-                            <FlashcardItem english="Vacation/Resort" chinese="度假风" imagePlaceholder={true} />
-                            <FlashcardItem english="Elegant" chinese="优雅风" imagePlaceholder={true} />
-                            <FlashcardItem english="Streetwear" chinese="街头风" imagePlaceholder={true} />
-                            <FlashcardItem english="Party" imagePlaceholder={true} />
-                            <FlashcardItem english="Girly" imagePlaceholder={true} />
-                            <FlashcardItem english="Urban/City" chinese="都市风" imagePlaceholder={true} />
-                            <FlashcardItem english="Fashion-forward/Trendy" chinese="时尚风" imagePlaceholder={true} />
+                            <FlashcardItem english="Vacation/Resort" chinese="度假风" pinyin="dù jià fēng" />
+                            <FlashcardItem english="Elegant" chinese="优雅风" pinyin="yōu yǎ fēng" />
+                            <FlashcardItem english="Streetwear" chinese="街头风" pinyin="jiē tóu fēng" />
+                            <FlashcardItem english="Party" chinese="派对" pinyin="pài duì" />
+                            <FlashcardItem english="Girly" chinese="少女风" pinyin="shào nǚ fēng" />
+                            <FlashcardItem english="Urban/City" chinese="都市风" pinyin="dū shì fēng" />
+                            <FlashcardItem english="Fashion-forward/Trendy" chinese="时尚风" pinyin="shí shàng fēng" />
                         </ul>
                     </SubcategoryItem>
                 </SubcategoryItem>
@@ -404,32 +457,32 @@
                 <SubcategoryItem title="男装 (Men's Clothing)">
                     <SubcategoryItem title="上衣 (Tops)">
                         <ul className="space-y-2">
-                            <FlashcardItem english="Men's Shirts" chinese="男式衬衫" imagePlaceholder={true} />
-                            <FlashcardItem english="Polo Shirt" chinese="POLO衫" imagePlaceholder={true} />
+                            <FlashcardItem english="Men's Shirts" chinese="男式衬衫" pinyin="nán shì chèn shān" />
+                            <FlashcardItem english="Polo Shirt" chinese="POLO衫" pinyin="POLO shān" />
                         </ul>
                     </SubcategoryItem>
                     <SubcategoryItem title="下装 (Bottoms)">
                         <ul className="space-y-2">
-                            <FlashcardItem english="Dress Pants" chinese="正装裤" imagePlaceholder={true} />
-                            <FlashcardItem english="Cargo Pants" chinese="工装裤" imagePlaceholder={true} />
-                            <FlashcardItem english="Straight Leg Pants" chinese="直筒裤" imagePlaceholder={true} />
-                            <FlashcardItem english="Skinny Pants" chinese="紧身裤" imagePlaceholder={true} />
-                            <FlashcardItem english="Flare/Wide Leg Pants" chinese="阔腿裤" imagePlaceholder={true} />
-                            <FlashcardItem english="Bootcut Pants" chinese="微喇裤" imagePlaceholder={true} />
-                            <FlashcardItem english="Sweatpants" chinese="运动裤" imagePlaceholder={true} />
-                            <FlashcardItem english="Suit Pants" chinese="西装裤" imagePlaceholder={true} />
+                            <FlashcardItem english="Dress Pants" chinese="正装裤" pinyin="zhèng zhuāng kù" />
+                            <FlashcardItem english="Cargo Pants" chinese="工装裤" pinyin="gōng zhuāng kù" />
+                            <FlashcardItem english="Straight Leg Pants" chinese="直筒裤" pinyin="zhí tǒng kù" />
+                            <FlashcardItem english="Skinny Pants" chinese="紧身裤" pinyin="jǐn shēn kù" />
+                            <FlashcardItem english="Flare/Wide Leg Pants" chinese="阔腿裤" pinyin="kuò tuǐ kù" />
+                            <FlashcardItem english="Bootcut Pants" chinese="微喇裤" pinyin="wēi lǎ kù" />
+                            <FlashcardItem english="Sweatpants" chinese="运动裤" pinyin="yùn dòng kù" />
+                            <FlashcardItem english="Suit Pants" chinese="西装裤" pinyin="xī zhuāng kù" />
                         </ul>
                     </SubcategoryItem>
                     <ul className="space-y-2 mt-2">
-                        <FlashcardItem english="Suits" chinese="西装" imagePlaceholder={true} />
+                        <FlashcardItem english="Suits" chinese="西装" pinyin="xī zhuāng" />
                     </ul>
                 </SubcategoryItem>
 
                 <SubcategoryItem title="童装 (Kids' Clothing)">
                     <ul className="space-y-2">
-                        <FlashcardItem english="Boys'" chinese="男童" imagePlaceholder={true} />
-                        <FlashcardItem english="Girls'" chinese="女童" imagePlaceholder={true} />
-                        <FlashcardItem english="Infant" chinese="婴儿" imagePlaceholder={true} />
+                        <FlashcardItem english="Boys'" chinese="男童" pinyin="nán tóng" />
+                        <FlashcardItem english="Girls'" chinese="女童" pinyin="nǚ tóng" />
+                        <FlashcardItem english="Infant" chinese="婴儿" pinyin="yīng ér" />
                     </ul>
                 </SubcategoryItem>
             </CategoryCard>
@@ -440,69 +493,69 @@
                 <SubcategoryItem title="中式传统服饰 (Chinese Traditional)" description="涵盖中国各朝代及现代改良的传统服饰。">
                     <SubcategoryItem title="旗袍/长衫 (Qipao/Cheongsam)" description="经典中式女装，展现东方韵味。">
                         <ul className="space-y-2">
-                            <FlashcardItem english="Modernized Qipao" chinese="改良旗袍" imagePlaceholder={true} />
-                            <FlashcardItem english="Traditional Cheongsam" chinese="传统长衫" imagePlaceholder={true} />
-                            <FlashcardItem english="Qipao Gowns" chinese="旗袍礼服" imagePlaceholder={true} />
+                            <FlashcardItem english="Modernized Qipao" chinese="改良旗袍" pinyin="gǎi liáng qí páo" />
+                            <FlashcardItem english="Traditional Cheongsam" chinese="传统长衫" pinyin="chuán tǒng cháng shān" />
+                            <FlashcardItem english="Qipao Gowns" chinese="旗袍礼服" pinyin="qí páo lǐ fú" />
                         </ul>
                     </SubcategoryItem>
                     <SubcategoryItem title="汉服 (Hanfu)" description="中国汉民族传统服饰，款式多样，历史悠久。">
                         <ul className="space-y-2">
-                            <FlashcardItem english="Hanfu" chinese="汉服" description="中国传统服饰" imagePlaceholder={true} />
-                            <FlashcardItem english="Tang Style" chinese="唐制汉服" imagePlaceholder={true} />
-                            <FlashcardItem english="Song Style" chinese="宋制汉服" imagePlaceholder={true} />
-                            <FlashcardItem english="Ming Style" chinese="明制汉服" imagePlaceholder={true} />
+                            <FlashcardItem english="Hanfu" chinese="汉服" pinyin="hàn fú" description="中国传统服饰" />
+                            <FlashcardItem english="Tang Style" chinese="唐制汉服" pinyin="táng zhì hàn fú" />
+                            <FlashcardItem english="Song Style" chinese="宋制汉服" pinyin="sòng zhì hàn fú" />
+                            <FlashcardItem english="Ming Style" chinese="明制汉服" pinyin="míng zhì hàn fú" />
                         </ul>
                     </SubcategoryItem>
                     <SubcategoryItem title="新中式 (New Chinese Style)" description="融合传统与现代设计元素，适合日常和时尚场合。">
                         <ul className="space-y-2">
-                            <FlashcardItem english="Knotted-button Tops" chinese="盘扣上衣" imagePlaceholder={true} />
-                            <FlashcardItem english="Ink-wash Print" chinese="水墨元素" imagePlaceholder={true} />
+                            <FlashcardItem english="Knotted-button Tops" chinese="盘扣上衣" pinyin="pán kòu shàng yī" />
+                            <FlashcardItem english="Ink-wash Print" chinese="水墨元素" pinyin="shuǐ mò yuán sù" />
                         </ul>
                     </SubcategoryItem>
                 </SubcategoryItem>
                 <SubcategoryItem title="亚洲其他传统 (Other Asian Traditional)" description="展示亚洲其他国家和地区的特色传统服饰。">
                     <SubcategoryItem title="和服 (Kimono)" description="日本传统民族服装，款式和穿着方式多样。">
                         <ul className="space-y-2">
-                            <FlashcardItem english="Kimono" chinese="和服" description="日本传统服饰" imagePlaceholder={true} />
-                            <FlashcardItem english="Yukata" chinese="浴衣" imagePlaceholder={true} />
-                            <FlashcardItem english="Formal Kimono" imagePlaceholder={true} />
+                            <FlashcardItem english="Kimono" chinese="和服" pinyin="hé fú" description="日本传统服饰" />
+                            <FlashcardItem english="Yukata" chinese="浴衣" pinyin="yù yī" />
+                            <FlashcardItem english="Formal Kimono" chinese="正装和服" pinyin="zhèng zhuāng hé fú" />
                         </ul>
                     </SubcategoryItem>
                     <ul className="space-y-2 mt-2">
-                        <FlashcardItem english="Vietnamese Ao Dai" chinese="奥黛" description="越南女性传统服装" imagePlaceholder={true} />
-                        <FlashcardItem english="Indian Sari" chinese="纱丽" description="印度女性传统服饰" imagePlaceholder={true} />
-                        <FlashcardItem english="Korean Hanbok" chinese="韩服" description="韩国传统礼服" imagePlaceholder={true} />
-                        <FlashcardItem english="Mongolian Deel" chinese="蒙古袍" description="蒙古民族传统服饰" imagePlaceholder={true} />
-                        <FlashcardItem english="Tibetan Robe" chinese="藏族服饰" description="中国藏族传统服饰" imagePlaceholder={true} />
+                        <FlashcardItem english="Vietnamese Ao Dai" chinese="奥黛" pinyin="ào dài" description="越南女性传统服装" />
+                        <FlashcardItem english="Indian Sari" chinese="纱丽" pinyin="shā lì" description="印度女性传统服饰" />
+                        <FlashcardItem english="Korean Hanbok" chinese="韩服" pinyin="hán fú" description="韩国传统礼服" />
+                        <FlashcardItem english="Mongolian Deel" chinese="蒙古袍" pinyin="méng gǔ páo" description="蒙古民族传统服饰" />
+                        <FlashcardItem english="Tibetan Robe" chinese="藏族服饰" pinyin="zàng zú fú shì" description="中国藏族传统服饰" />
                     </ul>
                 </SubcategoryItem>
                 <SubcategoryItem title="民族风服饰 (Ethnic & Tribal Styles)" description="汲取世界各地民族特色，展现异域风情。">
                     <SubcategoryItem title="非洲印花 (African Prints)" description="色彩鲜艳，图案独特的非洲传统印花服饰。">
                         <ul className="space-y-2">
-                            <FlashcardItem english="Ankara Dresses" chinese="安卡拉裙" imagePlaceholder={true} />
+                            <FlashcardItem english="Ankara Dresses" chinese="安卡拉裙" pinyin="ān kǎ lā qún" />
                         </ul>
                     </SubcategoryItem>
                     <ul className="space-y-2 mt-2">
-                        <FlashcardItem english="Bohemian" chinese="波西米亚风" imagePlaceholder={true} />
-                        <FlashcardItem english="Native American Patterns" chinese="印第安元素" imagePlaceholder={true} />
+                        <FlashcardItem english="Bohemian" chinese="波西米亚风" pinyin="bō xī mǐ yà fēng" />
+                        <FlashcardItem english="Native American Patterns" chinese="印第安元素" pinyin="yìn dì ān yuán sù" />
                     </ul>
                 </SubcategoryItem>
                 <SubcategoryItem title="节日庆典服装 (Festival Wear)" description="专为各类节日和庆典设计的华丽服饰。">
                     <ul className="space-y-2">
-                        <FlashcardItem english="Belly Dance Outfits" chinese="肚皮舞服装" imagePlaceholder={true} />
-                        <FlashcardItem english="Bollywood Style" chinese="宝莱坞风格" imagePlaceholder={true} />
-                        <FlashcardItem english="Carnival Costumes" chinese="狂欢节服饰" imagePlaceholder={true} />
+                        <FlashcardItem english="Belly Dance Outfits" chinese="肚皮舞服装" pinyin="dù pí wǔ fú zhuāng" />
+                        <FlashcardItem english="Bollywood Style" chinese="宝莱坞风格" pinyin="bǎo lái wù fēng gé" />
+                        <FlashcardItem english="Carnival Costumes" chinese="狂欢节服饰" pinyin="kuáng huān jié fú shì" />
                     </ul>
                 </SubcategoryItem>
                 <SubcategoryItem title="宗教传统服饰 (Religious Attire)" description="具有特定宗教或信仰背景的传统服装。">
                     <ul className="space-y-2">
-                        <FlashcardItem english="Abaya" chinese="罩袍" imagePlaceholder={true} />
-                        <FlashcardItem english="Hijab Sets" chinese="头巾套装" imagePlaceholder={true} />
+                        <FlashcardItem english="Abaya" chinese="罩袍" pinyin="zhào páo" />
+                        <FlashcardItem english="Hijab Sets" chinese="头巾套装" pinyin="tóu jīn tào zhuāng" />
                     </ul>
                 </SubcategoryItem>
                 <SubcategoryItem title="苏格兰裙 (Kilt)" description="苏格兰传统男装，常用于仪式场合。">
                     <ul className="space-y-2">
-                        <FlashcardItem english="Kilt" chinese="苏格兰裙" description="苏格兰传统男装，常用于仪式场合" imagePlaceholder={true} />
+                        <FlashcardItem english="Kilt" chinese="苏格兰裙" pinyin="sū gé lán qún" description="苏格兰传统男装，常用于仪式场合" />
                     </ul >
                 </SubcategoryItem>
             </CategoryCard>
@@ -515,32 +568,37 @@
                         <div>
                             <p className="font-semibold text-lg">婚纱 (hūnshā):</p>
                             <p className="ml-4">指西式婚礼中，新娘所穿的白色婚礼礼服，常见款式有拖尾、鱼尾、蓬裙等。强调浪漫、纯洁，源自西方文化。</p>
+                            <p className="ml-4 text-gray-500 text-sm">Refers to the white wedding gown worn by the bride in Western weddings, commonly featuring styles such as a train, mermaid, or ball gown. Emphasizes romance and purity, originating from Western culture.</p>
                         </div>
                         <div>
                             <p className="font-semibold text-lg">婚衣 (hūnyī):</p>
                             <p className="ml-4">泛指婚礼上穿着的礼服，包括中式和西式，男女皆可使用。例如“新郎婚衣”、“明代婚衣”。</p>
+                            <p className="ml-4 text-gray-500 text-sm">A general term for ceremonial attire worn at weddings, including both Chinese and Western styles, applicable to both men and women. For example, "groom's wedding attire," "Ming Dynasty wedding attire."</p>
                         </div>
                         <div>
                             <p className="font-semibold text-lg">嫁衣 (jiàyī):</p>
                             <p className="ml-4">传统用语，特指新娘出嫁当天所穿的礼服，带有浓厚的中国文化色彩。常用于诗词或文学中，强调女性角色与仪式意义。</p>
+                            <p className="ml-4 text-gray-500 text-sm">A traditional term specifically referring to the ceremonial dress worn by the bride on her wedding day, imbued with rich Chinese cultural significance. Often used in poetry or literature, emphasizing the female role and ritual meaning.</p>
                         </div>
                         <div>
                             <p className="font-semibold text-lg">婚服 (hūnfú):</p>
                             <p className="ml-4">较正式术语，广义包含婚礼仪式上的各类着装，细分为不同历史朝代、民族、场合之服装种类。可用于历史、民俗、学术语境。</p>
+                            <p className="ml-4 text-gray-500 text-sm">A more formal term, broadly encompassing various types of attire worn at wedding ceremonies, further categorized by historical dynasties, ethnic groups, and occasions. Can be used in historical, folkloric, or academic contexts.</p>
                         </div>
                     </div>
                 </SubcategoryItem>
 
                 <SubcategoryItem title="中式嫁衣 (Chinese Bridal)" description="中国传统婚礼中新娘穿着的特色礼服，承载深厚文化寓意。">
                     <ul className="space-y-2">
-                        <FlashcardItem english="Dragon-Phoenix Gown" chinese="龙凤褂" imagePlaceholder={true} />
-                        <FlashcardItem english="Xiuhé Dress" chinese="秀禾服" imagePlaceholder={true} />
-                        <FlashcardItem english="Qipao Bridal" chinese="旗袍嫁衣" imagePlaceholder={true} />
+                        <FlashcardItem english="Dragon-Phoenix Gown" chinese="龙凤褂" pinyin="lóng fèng guà" />
+                        <FlashcardItem english="Xiuhé Dress" chinese="秀禾服" pinyin="xiù hé fú" />
+                        <FlashcardItem english="Qipao Bridal" chinese="旗袍嫁衣" pinyin="qí páo jià yī" />
                         {/* Removed detailed Hanfu Wedding Dress styles as they are covered in Historical Overview */}
                         <SubcategoryItem title="汉服婚礼服 (Hanfu Wedding Dress)" description="不同朝代汉服风格的婚礼服，各具特色。" />
                         <FlashcardItem
                             english="Dragon-Phoenix Gown/Xi Gwa"
                             chinese="龙凤褂/喜褂"
+                            pinyin="lóng fèng guà / xǐ guà"
                             description={
                                 <>
                                     清代吉服改良，源自满族，立领对襟、收腰短袖、金银龙凤刺绣，广泛流行于广东、港澳。喜褂视觉效果更轻盈，适合北方新娘，以苏绣为主，刺绣平滑精致。
@@ -548,11 +606,11 @@
                                     <span className="text-gray-500">An improved version of Qing Dynasty auspicious attire, originating from the Manchu people. It features a stand-up collar, front opening, cinched waist, short sleeves, and gold and silver dragon and phoenix embroidery, widely popular in Guangdong, Hong Kong, and Macau. The Xi Gwa has a lighter visual effect, suitable for Northern brides, primarily featuring smooth and delicate Suzhou embroidery.</span>
                                 </>
                             }
-                            imagePlaceholder={true}
                         />
                         <FlashcardItem
                             english="Modern Chinese Style Gown"
                             chinese="中式改良礼服"
+                            pinyin="zhōng shì gǎi liáng lǐ fú"
                             description={
                                 <>
                                     中西结合，剪裁合体，融合传统图案与现代设计，深受年轻时尚新娘喜爱。
@@ -560,13 +618,13 @@
                                     <span className="text-gray-500">A blend of Chinese and Western styles, featuring a fitted silhouette that combines traditional patterns with modern design, highly favored by young and fashionable brides.</span>
                                 </>
                             }
-                            imagePlaceholder={true}
                         />
                         <SubcategoryItem title="中国婚服历史概览 (Historical Overview of Chinese Wedding Attire)" description="从古至今，中国婚服的演变历程与各朝代特色。">
                             <ul className="space-y-2">
                                 <FlashcardItem
                                     english="Zhou Dynasty Wedding Attire"
                                     chinese="周代婚服"
+                                    pinyin="zhōu dài hūn fú"
                                     description={
                                         <>
                                             崇尚庄重，遵循玄纁制度（黑红相配）。属周制礼服体系，新郎戴爵弁，新娘着黑色上衣、纁色下裳，象征阴阳调和与专一。
@@ -574,11 +632,11 @@
                                             <span className="text-gray-500">Emphasizes solemnity, adhering to the Xuanxun system (black and red matching). Part of the Zhou Dynasty ritual attire, the groom wears a Juebian, and the bride wears a black top and Xuan-colored lower garment, symbolizing the harmony of Yin and Yang and devotion.</span>
                                         </>
                                     }
-                                    imagePlaceholder={true}
                                 />
                                 <FlashcardItem
                                     english="Qin Dynasty Wedding Attire"
                                     chinese="秦代婚服"
+                                    pinyin="qín dài hūn fú"
                                     description={
                                         <>
                                             延续周礼，简朴肃穆。以黑色为主，新郎下裳镶黑边，迎亲马车漆黑，含“迎阴气入家”之意。
@@ -586,11 +644,11 @@
                                             <span className="text-gray-500">Continues Zhou Dynasty rituals, simple and solemn. Predominantly black, the groom's lower garment has black trim, and the wedding carriage is painted black, signifying "welcoming Yin energy into the home."</span>
                                         </>
                                     }
-                                    imagePlaceholder={true}
                                 />
                                 <FlashcardItem
                                     english="Han Dynasty Wedding Attire"
                                     chinese="汉代婚服"
+                                    pinyin="hàn dài hūn fú"
                                     description={
                                         <>
                                             属汉制深衣形制，隆重讲究层次。男女均穿曲裾深衣，女装紧窄曳地，多层交领，新娘面纱遮面，展现儒家礼制美学。
@@ -598,11 +656,11 @@
                                             <span className="text-gray-500">Belongs to the Han Dynasty Shenyi style, emphasizing grandeur and layering. Both men and women wear Quju Shenyi; the women's attire is tight-fitting and floor-length with multiple overlapping collars, and the bride wears a veil, showcasing Confucian ritual aesthetics.</span>
                                         </>
                                     }
-                                    imagePlaceholder={true}
                                 />
                                 <FlashcardItem
                                     english="Northern and Southern Dynasties Wedding Attire"
                                     chinese="南北朝婚服"
+                                    pinyin="nán běi cháo hūn fú"
                                     description={
                                         <>
                                             首次出现白色婚礼服。白纱、白裙配紫饰带，体现清新淡雅，受玄学影响。
@@ -610,11 +668,11 @@
                                             <span className="text-gray-500">The first appearance of white wedding attire. White gauze and white skirts with purple sashes, reflecting freshness and elegance, influenced by Xuanxue (Neo-Daoism).</span>
                                         </>
                                     }
-                                    imagePlaceholder={true}
                                 />
                                 <FlashcardItem
                                     english="Tang Dynasty Wedding Attire"
                                     chinese="唐代婚服"
+                                    pinyin="táng dài hūn fú"
                                     description={
                                         <>
                                             属于唐制礼服体系，风格华丽多彩，喜庆热烈。新娘钗钿礼衣、大袖长衫、广袖外衣，常为“红男绿女”搭配，展现盛唐气象。
@@ -622,11 +680,11 @@
                                             <span className="text-gray-500">Part of the Tang Dynasty ritual attire system, characterized by lavish and colorful styles, festive and vibrant. The bride wears Chai Dian Li Yi, large-sleeved long gowns, and wide-sleeved outer garments, often in "red for men, green for women" pairings, showcasing the grandeur of the prosperous Tang Dynasty.</span>
                                         </>
                                     }
-                                    imagePlaceholder={true}
                                 />
                                 <FlashcardItem
                                     english="Song Dynasty Wedding Attire"
                                     chinese="宋代婚服"
+                                    pinyin="sòng dài hūn fú"
                                     description={
                                         <>
                                             简约中见礼仪。新郎官服或皂衫，新娘凤冠霞帔，婚服多为青色。
@@ -634,11 +692,11 @@
                                             <span className="text-gray-500">Simplicity with emphasis on etiquette. The groom wears official robes or black gowns, and the bride wears a phoenix crown and Xiapei, with wedding attire often in blue-green.</span>
                                         </>
                                     }
-                                    imagePlaceholder={true}
                                 />
                                 <FlashcardItem
                                     english="Ming Dynasty Wedding Attire"
                                     chinese="明代婚服"
+                                    pinyin="míng dài hūn fú"
                                     description={
                                         <>
                                             属明制汉服体系，由明太祖朱元璋“上承周汉，下取唐宋”原则制定。婚服成熟化，新娘凤冠霞帔，红色大袖衣、红罗裙，配饰讲究，体现礼法秩序。
@@ -646,11 +704,11 @@
                                             <span className="text-gray-500">Belongs to the Ming Dynasty Hanfu system, established by Emperor Hongwu (Zhu Yuanzhang) based on the principle of "inheriting from Zhou and Han, drawing from Tang and Song." Wedding attire became mature, with the bride wearing a phoenix crown and Xiapei, red large-sleeved garments, and red silk skirts, with elaborate accessories, reflecting ritual order.</span>
                                         </>
                                     }
-                                    imagePlaceholder={true}
                                 />
                                 <FlashcardItem
                                     english="Qing Dynasty Wedding Attire"
                                     chinese="清代婚服"
+                                    pinyin="qīng dài hūn fú"
                                     description={
                                         <>
                                             融合满族与汉族服饰传统，形成清制礼服风格。新娘红绣袄裙或旗袍，配霞帔、簪花、盖头；新郎长袍马褂，体现宫廷与民间并行风格。
@@ -658,11 +716,11 @@
                                             <span className="text-gray-500">Integrates Manchu and Han clothing traditions, forming the Qing Dynasty ritual attire style. The bride wears a red embroidered aoqun or qipao, with Xiapei, hairpins, and a head covering; the groom wears a long robe and mandarin jacket, reflecting a style that coexisted in both court and folk settings.</span>
                                         </>
                                     }
-                                    imagePlaceholder={true}
                                 />
                                 <FlashcardItem
                                     english="Republic of China Era Wedding Attire"
                                     chinese="民国时期婚服"
+                                    pinyin="mín guó shí qī hūn fú"
                                     description={
                                         <>
                                             西化婚礼兴起。新娘西式婚纱，新郎西装，部分仍穿中式袍褂。
@@ -670,11 +728,11 @@
                                             <span className="text-gray-500">Western-style weddings emerged. Brides wore Western wedding gowns, grooms wore suits, though some still wore traditional Chinese robes and jackets.</span>
                                         </>
                                     }
-                                    imagePlaceholder={true}
                                 />
                                 <FlashcardItem
                                     english="1950s-1970s Wedding Attire"
                                     chinese="50-70年代婚服"
+                                    pinyin="wǔ shí qī shí nián dài hūn fú"
                                     description={
                                         <>
                                             革命气息浓厚。新郎穿蓝中山装，新娘穿蓝/绿军装，佩戴毛主席像章。
@@ -682,11 +740,11 @@
                                             <span className="text-gray-500">Strong revolutionary atmosphere. Grooms wore blue Zhongshan suits, brides wore blue/green military uniforms, and both wore Mao Zedong badges.</span>
                                         </>
                                     }
-                                    imagePlaceholder={true}
                                 />
                                 <FlashcardItem
                                     english="1980s-Present Wedding Attire"
                                     chinese="80年代至今婚服"
+                                    pinyin="bā shí nián dài zhì jīn hūn fú"
                                     description={
                                         <>
                                             多元化，传统复兴。西式婚纱流行，中式嫁衣（旗袍、龙凤褂、秀禾装）重新回归。
@@ -694,7 +752,6 @@
                                             <span className="text-gray-500">Diversified, with a revival of tradition. Western wedding gowns became popular, and traditional Chinese bridal attire (qipao, dragon-phoenix gowns, Xiuhé dresses) made a comeback.</span>
                                         </>
                                     }
-                                    imagePlaceholder={true}
                                 />
                             </ul>
                         </SubcategoryItem>
@@ -702,9 +759,13 @@
                 </SubcategoryItem>
                 <SubcategoryItem title="西式婚纱 (Western Wedding Dresses)" description="西方婚礼中新娘穿着的经典白色礼服。">
                     <ul className="space-y-2">
-                        <FlashcardItem english="Vintage Western" chinese="西式复古婚纱" imagePlaceholder={true} />
+                        <FlashcardItem english="Vintage Western" chinese="西式复古婚纱" pinyin="xī shì fù gǔ hūn shā" />
                     </ul>
                 </SubcategoryItem>
+                {/* Source for Wedding Attire Page */}
+                <p className="text-sm text-gray-500 mt-6 text-right">
+                    Source: <a href="https://baike.baidu.com/item/%E5%A9%9A%E6%9C%8D/12585197" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">Baidu</a>
+                </p>
             </CategoryCard>
         );
 
@@ -712,72 +773,72 @@
             <CategoryCard title="鞋履 (Footwear)">
                 <SubcategoryItem title="女鞋 (Women's Shoes)">
                     <ul className="space-y-2">
-                        <FlashcardItem english="Heels" chinese="高跟鞋" imagePlaceholder={true} />
-                        <FlashcardItem english="Flats" chinese="平底鞋" imagePlaceholder={true} />
+                        <FlashcardItem english="Heels" chinese="高跟鞋" pinyin="gāo gēn xié" />
+                        <FlashcardItem english="Flats" chinese="平底鞋" pinyin="píng dǐ xié" />
                     </ul>
                     <SubcategoryItem title="凉鞋 (Sandals)">
                         <ul className="space-y-2">
-                            <FlashcardItem english="High-Heel Sandals" chinese="高跟凉鞋" imagePlaceholder={true} />
-                            <FlashcardItem english="Platform/Wedge Sandals" chinese="厚底凉鞋、坡跟凉鞋" imagePlaceholder={true} />
-                            <FlashcardItem english="Flat Sandals" chinese="平底凉鞋" imagePlaceholder={true} />
-                            <FlashcardItem english="Slide Sandals" chinese="凉拖鞋" imagePlaceholder={true} />
+                            <FlashcardItem english="High-Heel Sandals" chinese="高跟凉鞋" pinyin="gāo gēn liáng xié" />
+                            <FlashcardItem english="Platform/Wedge Sandals" chinese="厚底凉鞋、坡跟凉鞋" pinyin="hòu dǐ liáng xié, pō gēn liáng xié" />
+                            <FlashcardItem english="Flat Sandals" chinese="平底凉鞋" pinyin="píng dǐ liáng xié" />
+                            <FlashcardItem english="Slide Sandals" chinese="凉拖鞋" pinyin="liáng tuō xié" />
                         </ul>
                     </SubcategoryItem>
                     <ul className="space-y-2 mt-2">
-                        <FlashcardItem english="Mules & Clogs" chinese="穆勒鞋和洞洞鞋" imagePlaceholder={true} />
-                        <FlashcardItem english="Flip-flops" chinese="人字拖" imagePlaceholder={true} />
-                        <FlashcardItem english="Slippers" chinese="拖鞋" imagePlaceholder={true} />
-                        <FlashcardItem english="Loafers & Slip-ons" chinese="乐福鞋与一脚蹬" imagePlaceholder={true} />
-                        <FlashcardItem english="Oxfords" chinese="牛津鞋" imagePlaceholder={true} />
-                        <FlashcardItem english="Canvas Shoes" chinese="帆布鞋" imagePlaceholder={true} />
-                        <FlashcardItem english="Ankle Boots" chinese="短靴" imagePlaceholder={true} />
-                        <FlashcardItem english="Mid-Calf Boots" chinese="中筒靴" imagePlaceholder={true} />
-                        <FlashcardItem english="Knee-High Boots" chinese="及膝靴" imagePlaceholder={true} />
-                        <FlashcardItem english="Over-the-Knee Boots" chinese="过膝靴" imagePlaceholder={true} />
-                        <FlashcardItem english="Fashion Sneakers" chinese="时尚运动鞋" imagePlaceholder={true} />
-                        <FlashcardItem english="Work & Safety Shoes" chinese="工作鞋和安全鞋" imagePlaceholder={true} />
+                        <FlashcardItem english="Mules & Clogs" chinese="穆勒鞋和洞洞鞋" pinyin="mù lè xié hé dòng dòng xié" />
+                        <FlashcardItem english="Flip-flops" chinese="人字拖" pinyin="rén zì tuō" />
+                        <FlashcardItem english="Slippers" chinese="拖鞋" pinyin="tuō xié" />
+                        <FlashcardItem english="Loafers & Slip-ons" chinese="乐福鞋与一脚蹬" pinyin="lè fú xié yǔ yī jiǎo dēng" />
+                        <FlashcardItem english="Oxfords" chinese="牛津鞋" pinyin="niú jīn xié" />
+                        <FlashcardItem english="Canvas Shoes" chinese="帆布鞋" pinyin="fān bù xié" />
+                        <FlashcardItem english="Ankle Boots" chinese="短靴" pinyin="duǎn xuē" />
+                        <FlashcardItem english="Mid-Calf Boots" chinese="中筒靴" pinyin="zhōng tǒng xuē" />
+                        <FlashcardItem english="Knee-High Boots" chinese="及膝靴" pinyin="jí xī xuē" />
+                        <FlashcardItem english="Over-the-Knee Boots" chinese="过膝靴" pinyin="guò xī xuē" />
+                        <FlashcardItem english="Fashion Sneakers" chinese="时尚运动鞋" pinyin="shí shàng yùn dòng xié" />
+                        <FlashcardItem english="Work & Safety Shoes" chinese="工作鞋和安全鞋" pinyin="gōng zuò xié hé ān quán xié" />
                     </ul>
                 </SubcategoryItem>
                 <SubcategoryItem title="男鞋 (Men's Shoes)">
                     <ul className="space-y-2">
-                        <FlashcardItem english="Casual Shoes" chinese="休闲鞋" imagePlaceholder={true} />
-                        <FlashcardItem english="Dress Shoes" chinese="正装鞋" imagePlaceholder={true} />
-                        <FlashcardItem english="Business Casual Shoes" chinese="商务休闲鞋" imagePlaceholder={true} />
-                        <FlashcardItem english="Athletic Casual Shoes" chinese="运动休闲鞋" imagePlaceholder={true} />
-                        <FlashcardItem english="Sandals" chinese="凉鞋" imagePlaceholder={true} />
-                        <FlashcardItem english="Loafers & Slip-ons" chinese="乐福鞋及一脚蹬" imagePlaceholder={true} />
-                        <FlashcardItem english="Oxfords" chinese="牛津鞋" imagePlaceholder={true} />
-                        <FlashcardItem english="Slippers" chinese="拖鞋" imagePlaceholder={true} />
-                        <FlashcardItem english="Mules & Clogs" chinese="穆勒鞋、洞洞鞋" imagePlaceholder={true} />
-                        <FlashcardItem english="Work Shoes" chinese="工作鞋" imagePlaceholder={true} />
+                        <FlashcardItem english="Casual Shoes" chinese="休闲鞋" pinyin="xiū xián xié" />
+                        <FlashcardItem english="Dress Shoes" chinese="正装鞋" pinyin="zhèng zhuāng xié" />
+                        <FlashcardItem english="Business Casual Shoes" chinese="商务休闲鞋" pinyin="shāng wù xiū xián xié" />
+                        <FlashcardItem english="Athletic Casual Shoes" chinese="运动休闲鞋" pinyin="yùn dòng xiū xián xié" />
+                        <FlashcardItem english="Sandals" chinese="凉鞋" pinyin="liáng xié" />
+                        <FlashcardItem english="Loafers & Slip-ons" chinese="乐福鞋及一脚蹬" pinyin="lè fú xié jí yī jiǎo dēng" />
+                        <FlashcardItem english="Oxfords" chinese="牛津鞋" pinyin="niú jīn xié" />
+                        <FlashcardItem english="Slippers" chinese="拖鞋" pinyin="tuō xié" />
+                        <FlashcardItem english="Mules & Clogs" chinese="穆勒鞋、洞洞鞋" pinyin="mù lè xié, dòng dòng xié" />
+                        <FlashcardItem english="Work Shoes" chinese="工作鞋" pinyin="gōng zuò xié" />
                     </ul>
                     <SubcategoryItem title="靴子 (Boots)">
                         <ul className="space-y-2">
-                            <FlashcardItem english="Rain Boots" chinese="雨靴" imagePlaceholder={true} />
-                            <FlashcardItem english="Snow Boots" chinese="雪地靴" imagePlaceholder={true} />
+                            <FlashcardItem english="Rain Boots" chinese="雨靴" pinyin="yǔ xuē" />
+                            <FlashcardItem english="Snow Boots" chinese="雪地靴" pinyin="xuě dì xuē" />
                         </ul>
                     </SubcategoryItem>
                     <ul className="space-y-2 mt-2">
-                        <FlashcardItem english="Skate Shoes" chinese="滑板鞋" imagePlaceholder={true} />
-                        <FlashcardItem english="Canvas Shoes" chinese="帆布鞋" imagePlaceholder={true} />
+                        <FlashcardItem english="Skate Shoes" chinese="滑板鞋" pinyin="huá bǎn xié" />
+                        <FlashcardItem english="Canvas Shoes" chinese="帆布鞋" pinyin="fān bù xié" />
                     </ul>
                 </SubcategoryItem>
                 <SubcategoryItem title="中性鞋 (Unisex Footwear)">
                     <ul className="space-y-2">
-                        <FlashcardItem english="Sneakers/Athletic Shoes" chinese="运动鞋" imagePlaceholder={true} />
+                        <FlashcardItem english="Sneakers/Athletic Shoes" chinese="运动鞋" pinyin="yùn dòng xié" />
                     </ul>
                 </SubcategoryItem>
                 <SubcategoryItem title="童鞋 (Kids' Shoes)">
                     <ul className="space-y-2">
-                        <FlashcardItem english="Boys'" chinese="男童" imagePlaceholder={true} />
-                        <FlashcardItem english="Girls'" chinese="女童" imagePlaceholder={true} />
-                        <FlashcardItem english="Infant" chinese="婴儿" imagePlaceholder={true} />
+                        <FlashcardItem english="Boys'" chinese="男童" pinyin="nán tóng" />
+                        <FlashcardItem english="Girls'" chinese="女童" pinyin="nǚ tóng" />
+                        <FlashcardItem english="Infant" chinese="婴儿" pinyin="yīng ér" />
                     </ul>
                 </SubcategoryItem>
                 <SubcategoryItem title="鞋履配饰 (Footwear Accessories)">
                     <ul className="space-y-2">
-                        <FlashcardItem english="Boot & Shoe Accessories" chinese="鞋靴配饰" imagePlaceholder={true} />
-                        <FlashcardItem english="Shoe Accessories" chinese="鞋子配饰" imagePlaceholder={true} />
+                        <FlashcardItem english="Boot & Shoe Accessories" chinese="鞋靴配饰" pinyin="xié xuē pèi shì" />
+                        <FlashcardItem english="Shoe Accessories" chinese="鞋子配饰" pinyin="xié zi pèi shì" />
                     </ul>
                 </SubcategoryItem>
             </CategoryCard>
@@ -787,20 +848,20 @@
             <CategoryCard title="内衣与睡衣 (Underwear & Sleepwear)">
                 <SubcategoryItem title="女士内衣与睡衣 (Women's Underwear & Sleepwear)">
                     <ul className="space-y-2">
-                        <FlashcardItem english="Bras" chinese="文胸" imagePlaceholder={true} />
-                        <FlashcardItem english="Panties" chinese="内裤" imagePlaceholder={true} />
-                        <FlashcardItem english="Pajamas/Nightwear" chinese="睡衣" imagePlaceholder={true} />
-                        <FlashcardItem english="Loungewear" chinese="家居服" imagePlaceholder={true} />
-                        <FlashcardItem english="Shapewear/Bodysuits" chinese="紧身衣" imagePlaceholder={true} />
-                        <FlashcardItem english="Robes" chinese="睡袍" imagePlaceholder={true} />
+                        <FlashcardItem english="Bras" chinese="文胸" pinyin="wén xiōng" />
+                        <FlashcardItem english="Panties" chinese="内裤" pinyin="nèi kù" />
+                        <FlashcardItem english="Pajamas/Nightwear" chinese="睡衣" pinyin="shuì yī" />
+                        <FlashcardItem english="Loungewear" chinese="家居服" pinyin="jiā jū fú" />
+                        <FlashcardItem english="Shapewear/Bodysuits" chinese="紧身衣" pinyin="jǐn shēn yī" />
+                        <FlashcardItem english="Robes" chinese="睡袍" pinyin="shuì páo" />
                     </ul>
                 </SubcategoryItem>
                 <SubcategoryItem title="男士内衣与睡衣 (Men's Underwear & Sleepwear)">
                     <ul className="space-y-2">
-                        <FlashcardItem english="Underwear - Briefs/Boxers/Boxer Briefs" chinese="内裤" imagePlaceholder={true} />
-                        <FlashcardItem english="Pajamas/Nightwear" chinese="睡衣" imagePlaceholder={true} />
-                        <FlashcardItem english="Loungewear" chinese="家居服" imagePlaceholder={true} />
-                        <FlashcardItem english="Robes" chinese="睡袍" imagePlaceholder={true} />
+                        <FlashcardItem english="Underwear - Briefs/Boxers/Boxer Briefs" chinese="内裤" pinyin="nèi kù" />
+                        <FlashcardItem english="Pajamas/Nightwear" chinese="睡衣" pinyin="shuì yī" />
+                        <FlashcardItem english="Loungewear" chinese="家居服" pinyin="jiā jū fú" />
+                        <FlashcardItem english="Robes" chinese="睡袍" pinyin="shuì páo" />
                     </ul>
                 </SubcategoryItem>
             </CategoryCard>
@@ -810,86 +871,223 @@
             <CategoryCard title="配饰 (Accessories)">
                 <SubcategoryItem title="珠宝 (Jewelry)">
                     <ul className="space-y-2">
-                        <FlashcardItem english="Necklaces" chinese="项链" imagePlaceholder={true} />
-                        <FlashcardItem english="Earrings" chinese="耳环" imagePlaceholder={true} />
-                        <FlashcardItem english="Bracelets" chinese="手链" imagePlaceholder={true} />
-                        <FlashcardItem english="Rings" chinese="戒指" imagePlaceholder={true} />
-                        <FlashcardItem english="Hair Accessories" chinese="发饰" imagePlaceholder={true} />
+                        <FlashcardItem english="Necklaces" chinese="项链" pinyin="xiàng liàn" />
+                        <FlashcardItem english="Earrings" chinese="耳环" pinyin="ěr huán" />
+                        <FlashcardItem english="Bracelets" chinese="手链" pinyin="shǒu liàn" />
+                        <FlashcardItem english="Rings" chinese="戒指" pinyin="jiè zhǐ" />
+                        <FlashcardItem english="Hair Accessories" chinese="发饰" pinyin="fà shì" />
                     </ul>
                 </SubcategoryItem>
                 <SubcategoryItem title="箱包 (Bags)">
                     <SubcategoryItem title="按携带方式 (By Carrying Method)">
                         <ul className="space-y-2">
-                            <FlashcardItem english="Backpacks" chinese="双肩包" imagePlaceholder={true} />
-                            <FlashcardItem english="Shoulder Bags" chinese="单肩包" imagePlaceholder={true} />
-                            <FlashcardItem english="Cross-body Bags" chinese="斜挎包" imagePlaceholder={true} />
-                            <FlashcardItem english="Handbags" chinese="手提包" imagePlaceholder={true} />
-                            <FlashcardItem english="Waist Bags/Fanny Packs" chinese="腰包" imagePlaceholder={true} />
-                            <FlashcardItem english="Clutches" chinese="手拿包" imagePlaceholder={true} />
+                            <FlashcardItem english="Backpacks" chinese="双肩包" pinyin="shuāng jiān bāo" />
+                            <FlashcardItem english="Shoulder Bags" chinese="单肩包" pinyin="dān jiān bāo" />
+                            <FlashcardItem english="Cross-body Bags" chinese="斜挎包" pinyin="xié kuà bāo" />
+                            <FlashcardItem english="Handbags" chinese="手提包" pinyin="shǒu tí bāo" />
+                            <FlashcardItem english="Waist Bags/Fanny Packs" chinese="腰包" pinyin="yāo bāo" />
+                            <FlashcardItem english="Clutches" chinese="手拿包" pinyin="shǒu ná bāo" />
                         </ul>
                     </SubcategoryItem>
                     <SubcategoryItem title="按功能用途 (By Function)">
                         <ul className="space-y-2">
-                            <FlashcardItem english="Wallets" chinese="钱包" imagePlaceholder={true} />
-                            <FlashcardItem english="Card Holders" chinese="卡包" imagePlaceholder={true} />
-                            <FlashcardItem english="Coin Purses" chinese="零钱包" imagePlaceholder={true} />
-                            <FlashcardItem english="Briefcases" chinese="公文包" imagePlaceholder={true} />
-                            <FlashcardItem english="Travel Bags" chinese="旅行包" imagePlaceholder={true} />
-                            <FlashcardItem english="Duffel Bags" chinese="旅行袋" imagePlaceholder={true} />
-                            <FlashcardItem english="Luggage" chinese="行李箱" imagePlaceholder={true} />
-                            <FlashcardItem english="Messenger Bags" chinese="邮差包" imagePlaceholder={true} />
-                            <FlashcardItem english="Tote Bags" chinese="购物包" imagePlaceholder={true} />
-                            <FlashcardItem english="Drawstring Bags" chinese="束口袋" imagePlaceholder={true} />
-                            <FlashcardItem english="Cosmetic Pouches" chinese="化妆包" imagePlaceholder={true} />
+                            <FlashcardItem english="Wallets" chinese="钱包" pinyin="qián bāo" />
+                            <FlashcardItem english="Card Holders" chinese="卡包" pinyin="kǎ bāo" />
+                            <FlashcardItem english="Coin Purses" chinese="零钱包" pinyin="líng qián bāo" />
+                            <FlashcardItem english="Briefcases" chinese="公文包" pinyin="gōng wén bāo" />
+                            <FlashcardItem english="Travel Bags" chinese="旅行包" pinyin="lǚ xíng bāo" />
+                            <FlashcardItem english="Duffel Bags" chinese="旅行袋" pinyin="lǚ xíng dài" />
+                            <FlashcardItem english="Luggage" chinese="行李箱" pinyin="xíng lǐ xiāng" />
+                            <FlashcardItem english="Messenger Bags" chinese="邮差包" pinyin="yóu chāi bāo" />
+                            <FlashcardItem english="Tote Bags" chinese="购物包" pinyin="gòu wù bāo" />
+                            <FlashcardItem english="Drawstring Bags" chinese="束口袋" pinyin="shù kǒu dài" />
+                            <FlashcardItem english="Cosmetic Pouches" chinese="化妆包" pinyin="huà zhuāng bāo" />
                         </ul>
                     </SubcategoryItem>
                     <SubcategoryItem title="按设计款式 (By Design Style)">
                         <ul className="space-y-2">
-                            <FlashcardItem english="Bucket Bags" chinese="水桶包" imagePlaceholder={true} />
-                            <FlashcardItem english="Satchels" chinese="剑桥包" imagePlaceholder={true} />
-                            <FlashcardItem english="Hobo Bags" chinese="流浪包/新月包" imagePlaceholder={true} />
-                            <FlashcardItem english="Frame Bags" chinese="口金包" imagePlaceholder={true} />
-                            <FlashcardItem english="Envelope Bags" chinese="信封包" imagePlaceholder={true} />
-                            <FlashcardItem english="Baguette Bags" chinese="法棍包" imagePlaceholder={true} />
-                            <FlashcardItem english="Doctor Bags" chinese="医生包" imagePlaceholder={true} />
-                            <FlashcardItem english="Boston Bags" chinese="波士顿包" imagePlaceholder={true} />
-                            <FlashcardItem english="Trapeze Bags" chinese="蝙蝠包" imagePlaceholder={true} />
-                            <FlashcardItem english="Bowling Bags" chinese="保龄球包" imagePlaceholder={true} />
-                            <FlashcardItem english="Minaudières - Formal Clutches" chinese="晚宴包" imagePlaceholder={true} />
+                            <FlashcardItem english="Bucket Bags" chinese="水桶包" pinyin="shuǐ tǒng bāo" />
+                            <FlashcardItem english="Satchels" chinese="剑桥包" pinyin="jiàn qiáo bāo" />
+                            <FlashcardItem english="Hobo Bags" chinese="流浪包/新月包" pinyin="liú làng bāo / xīn yuè bāo" />
+                            <FlashcardItem english="Frame Bags" chinese="口金包" pinyin="kǒu jīn bāo" />
+                            <FlashcardItem english="Envelope Bags" chinese="信封包" pinyin="xìn fēng bāo" />
+                            <FlashcardItem english="Baguette Bags" chinese="法棍包" pinyin="fǎ gùn bāo" />
+                            <FlashcardItem english="Doctor Bags" chinese="医生包" pinyin="yī shēng bāo" />
+                            <FlashcardItem english="Boston Bags" chinese="波士顿包" pinyin="bō shì dùn bāo" />
+                            <FlashcardItem english="Trapeze Bags" chinese="蝙蝠包" pinyin="biān fú bāo" />
+                            <FlashcardItem english="Bowling Bags" chinese="保龄球包" pinyin="bǎo líng qiú bāo" />
+                            <FlashcardItem english="Minaudières - Formal Clutches" chinese="晚宴包" pinyin="wǎn yàn bāo" />
                         </ul>
                     </SubcategoryItem>
                     <SubcategoryItem title="特殊类别 (Special Categories)">
                         <ul className="space-y-2">
-                            <FlashcardItem english="Sustainable Bags" chinese="环保袋" imagePlaceholder={true} />
-                            <FlashcardItem english="Kids' Backpacks" chinese="儿童背包" imagePlaceholder={true} />
-                            <FlashcardItem english="Athletic Bags" chinese="运动休闲包" imagePlaceholder={true} />
+                            <FlashcardItem english="Sustainable Bags" chinese="环保袋" pinyin="huán bǎo dài" />
+                            <FlashcardItem english="Kids' Backpacks" chinese="儿童背包" pinyin="ér tóng bèi bāo" />
+                            <FlashcardItem english="Athletic Bags" chinese="运动休闲包" pinyin="yùn dòng xiū xián bāo" />
                         </ul>
                     </SubcategoryItem>
                 </SubcategoryItem>
                 <SubcategoryItem title="其他配饰 (Other Accessories)">
                     <ul className="space-y-2">
-                        <FlashcardItem english="Hats" chinese="帽子" imagePlaceholder={true} />
-                        <FlashcardItem english="Scarves" chinese="围巾" imagePlaceholder={true} />
-                        <FlashcardItem english="Gloves" chinese="手套" imagePlaceholder={true} />
-                        <FlashcardItem english="Eyewear - Glasses/Sunglasses" chinese="眼镜" imagePlaceholder={true} />
-                        <FlashcardItem english="Belts" chinese="腰带" imagePlaceholder={true} />
-                        <FlashcardItem english="Ties/Bow Ties" chinese="领带/领结" imagePlaceholder={true} />
-                        <FlashcardItem english="Socks" chinese="袜子" imagePlaceholder={true} />
-                        <FlashcardItem english="Silk Scarves" chinese="丝巾" imagePlaceholder={true} />
-                        <FlashcardItem english="Cufflinks" chinese="袖扣" imagePlaceholder={true} />
-                        <FlashcardItem english="Watches" chinese="手表" imagePlaceholder={true} />
+                        <FlashcardItem english="Hats" chinese="帽子" pinyin="mào zi" />
+                        <FlashcardItem english="Scarves" chinese="围巾" pinyin="wéi jīn" />
+                        <FlashcardItem english="Gloves" chinese="手套" pinyin="shǒu tào" />
+                        <FlashcardItem english="Eyewear - Glasses/Sunglasses" chinese="眼镜" pinyin="yǎn jìng" />
+                        <FlashcardItem english="Belts" chinese="腰带" pinyin="yāo dài" />
+                        <FlashcardItem english="Ties/Bow Ties" chinese="领带/领结" pinyin="lǐng dài / lǐng jié" />
+                        <FlashcardItem english="Socks" chinese="袜子" pinyin="wà zi" />
+                        <FlashcardItem english="Silk Scarves" chinese="丝巾" pinyin="sī jīn" />
+                        <FlashcardItem english="Cufflinks" chinese="袖扣" pinyin="xiù kòu" />
+                        <FlashcardItem english="Watches" chinese="手表" pinyin="shǒu biǎo" />
                     </ul>
                 </SubcategoryItem>
                 {/* 传统配饰 (Traditional Accessories) */}
                 <SubcategoryItem title="传统配饰 (Traditional Accessories)">
                     <ul className="space-y-2">
-                        <FlashcardItem english="Hairpins & Combs" chinese="中式发饰" imagePlaceholder={true} />
-                        <FlashcardItem english="Obi Belts" chinese="日式腰带" imagePlaceholder={true} />
-                        <FlashcardItem english="Bangles" chinese="印度手链" imagePlaceholder={true} />
+                        <FlashcardItem english="Hairpins & Combs" chinese="中式发饰" pinyin="zhōng shì fà shì" />
+                        <FlashcardItem english="Obi Belts" chinese="日式腰带" pinyin="rì shì yāo dài" />
+                        <FlashcardItem english="Bangles" chinese="印度手链" pinyin="yìn dù shǒu liàn" />
                     </ul>
                 </SubcategoryItem>
             </CategoryCard>
         );
+
+        const FabricsMaterialsPage = () => (
+            <CategoryCard title="面料与材质 (Fabrics & Materials)">
+                <p className="text-sm text-gray-700 mb-4 text-center">
+                    有助于理解衣物质感、保养方法等，常用于购物或描述衣物。
+                    <br />
+                    <span className="text-gray-500">Helps in understanding fabric texture, care methods, etc., commonly used when shopping or describing clothing.</span>
+                </p>
+                <ul className="space-y-2">
+                    <FlashcardItem english="Polyester" chinese="聚酯纤维" pinyin="jù zhī xiān wéi" />
+                    <FlashcardItem english="Cotton" chinese="棉" pinyin="mián" />
+                    <FlashcardItem english="Cotton Blend" chinese="棉混纺" pinyin="mián hùn fǎng" />
+                    <FlashcardItem english="Polyester And Spandex" chinese="聚酯纤维和氨纶" pinyin="jù zhī xiān wéi hé ān lún" />
+                    <FlashcardItem english="Denim" chinese="牛仔布" pinyin="niú zǎi bù" />
+                    <FlashcardItem english="Acrylic" chinese="腈纶" pinyin="jīng lún" />
+                    <FlashcardItem english="Rayon" chinese="人造丝" pinyin="rén zào sī" />
+                    <FlashcardItem english="Linen" chinese="麻" pinyin="má" />
+                    <FlashcardItem english="Nylon" chinese="尼龙" pinyin="ní lóng" />
+                    <FlashcardItem english="Sequins" chinese="亮片" pinyin="liàng piàn" />
+                    <FlashcardItem english="Jersey" chinese="针织平纹布" pinyin="zhēn zhī píng wén bù" />
+                    <FlashcardItem english="Polyamide" chinese="聚酰胺" pinyin="jù xiān àn" />
+                    <FlashcardItem english="Bamboo Fiber" chinese="竹纤维" pinyin="zhú xiān wéi" />
+                    <FlashcardItem english="Mesh" chinese="网眼布" pinyin="wǎng yǎn bù" />
+                    <FlashcardItem english="Acetate" chinese="醋酸纤维" pinyin="cù suān xiān wéi" />
+                    <FlashcardItem english="Mesh embroidery" chinese="网纱刺绣" pinyin="wǎng shā cì xiù" />
+                    <FlashcardItem english="Knitted Fabric PU" chinese="针织PU面料" pinyin="zhēn zhī PU miàn liào" />
+                    <FlashcardItem english="PU Leather" chinese="PU皮革" pinyin="PU pí gé" />
+                    <FlashcardItem english="Faux leather" chinese="仿皮" pinyin="fǎng pí" />
+                    <FlashcardItem english="Chiffon" chinese="雪纺" pinyin="xuě fǎng" />
+                    <FlashcardItem english="Woven Fabric" chinese="梭织面料" pinyin="suō zhī miàn liào" />
+                    <FlashcardItem english="Wool" chinese="羊毛" pinyin="yáng máo" />
+                </ul>
+            </CategoryCard>
+        );
+
+        const StylesFashionTrendsPage = () => (
+            <CategoryCard title="风格与流行趋势 (Styles & Fashion Trends)">
+                <p className="text-sm text-gray-700 mb-4 text-center">
+                    包括街头风、极简风、复古风等，用于提高表达能力和时尚相关对话。
+                    <br />
+                    <span className="text-gray-500">Includes styles like street style, minimalism, vintage, etc., used to improve expressive ability and fashion-related conversations.</span>
+                </p>
+                <ul className="space-y-2">
+                    <FlashcardItem english="Street Style" chinese="街头风" pinyin="jiē tóu fēng" />
+                    <FlashcardItem english="Minimalism" chinese="极简风" pinyin="jí jiǎn fēng" />
+                    <FlashcardItem english="Vintage" chinese="复古风" pinyin="fù gǔ fēng" />
+                    <FlashcardItem english="Bohemian" chinese="波西米亚风" pinyin="bō xī mǐ yà fēng" />
+                    <FlashcardItem english="Athleisure" chinese="运动休闲风" pinyin="yùn dòng xiū xián fēng" />
+                    <FlashcardItem english="Preppy" chinese="学院风" pinyin="xué yuàn fēng" />
+                    <FlashcardItem english="Dark Fashion" chinese="暗黑风" pinyin="àn hēi fēng" />
+                    <FlashcardItem english="Eclectic Style" chinese="混搭风" pinyin="hùn dā fēng" />
+                    <FlashcardItem english="Y2K Fashion" chinese="Y2K风格" pinyin="Y2K fēng gé" />
+                </ul>
+            </CategoryCard>
+        );
+
+        // New filter pages
+        const PatternPage = () => (
+            <CategoryCard title="图案 (Pattern)">
+                <p className="text-sm text-gray-700 mb-4 text-center">
+                    描述服装上的各种图案和印花。
+                    <br />
+                    <span className="text-gray-500">Describes various patterns and prints on clothing.</span>
+                </p>
+                <ul className="space-y-2">
+                    <FlashcardItem english="Solid Color" chinese="纯色" pinyin="chún sè" />
+                    <FlashcardItem english="Striped" chinese="条纹" pinyin="tiáo wén" />
+                    <FlashcardItem english="Plaid/Checkered" chinese="格子" pinyin="gé zi" />
+                    <FlashcardItem english="Floral Print" chinese="印花" pinyin="yìn huā" />
+                    <FlashcardItem english="Animal Print" chinese="动物纹" pinyin="dòng wù wén" />
+                    <FlashcardItem english="Geometric" chinese="几何图案" pinyin="jǐ hé tú àn" />
+                    <FlashcardItem english="Abstract" chinese="抽象图案" pinyin="chōu xiàng tú àn" />
+                    <FlashcardItem english="Embroidered" chinese="刺绣" pinyin="cì xiù" />
+                    <FlashcardItem english="Graphic Print" chinese="图案印花" pinyin="tú àn yìn huā" />
+                </ul>
+            </CategoryCard>
+        );
+
+        const WeavingMethodPage = () => (
+            <CategoryCard title="编织方法 (Weaving Method)">
+                <p className="text-sm text-gray-700 mb-4 text-center">
+                    描述面料的编织或制作方式。
+                    <br />
+                    <span className="text-gray-500">Describes the weaving or manufacturing method of fabrics.</span>
+                </p>
+                <ul className="space-y-2">
+                    <FlashcardItem english="Woven" chinese="梭织" pinyin="suō zhī" />
+                    <FlashcardItem english="Knitted" chinese="针织" pinyin="zhēn zhī" />
+                    <FlashcardItem english="Crochet" chinese="钩编" pinyin="gōu biān" />
+                    <FlashcardItem english="Lace" chinese="蕾丝" pinyin="lěi sī" />
+                    <FlashcardItem english="Denim Weave" chinese="牛仔斜纹" pinyin="niú zǎi xié wén" />
+                    <FlashcardItem english="Jacquard" chinese="提花" pinyin="tí huā" />
+                </ul>
+            </CategoryCard>
+        );
+
+        const FitTypePage = () => (
+            <CategoryCard title="版型 (Fit Type)">
+                <p className="text-sm text-gray-700 mb-4 text-center">
+                    描述服装的剪裁和穿着效果。
+                    <br />
+                    <span className="text-gray-500">Describes the cut and fit of clothing.</span>
+                </p>
+                <ul className="space-y-2">
+                    <FlashcardItem english="Slim Fit" chinese="修身" pinyin="xiū shēn" />
+                    <FlashcardItem english="Regular Fit" chinese="常规版型" pinyin="cháng guī bǎn xíng" />
+                    <FlashcardItem english="Loose Fit" chinese="宽松" pinyin="kuān sōng" />
+                    <FlashcardItem english="Oversized" chinese="超大版型" pinyin="chāo dà bǎn xíng" />
+                    <FlashcardItem english="Bodycon" chinese="紧身" pinyin="jǐn shēn" />
+                    <FlashcardItem english="Flared" chinese="喇叭形" pinyin="lǎ bɑ xíng" />
+                    <FlashcardItem english="Straight" chinese="直筒" pinyin="zhí tǒng" />
+                    <FlashcardItem english="A-line" chinese="A字形" pinyin="A zì xíng" />
+                </ul>
+            </CategoryCard>
+        );
+
+        const OperationInstructionPage = () => (
+            <CategoryCard title="操作说明 (Operation Instruction)">
+                <p className="text-sm text-gray-700 mb-4 text-center">
+                    关于服装的特殊操作或穿着方式。
+                    <br />
+                    <span className="text-gray-500">Instructions for special operations or ways of wearing clothing.</span>
+                </p>
+                <ul className="space-y-2">
+                    <FlashcardItem english="Zipper Closure" chinese="拉链开合" pinyin="lā liàn kāi hé" />
+                    <FlashcardItem english="Button Closure" chinese="纽扣开合" pinyin="niǔ kòu kāi hé" />
+                    <FlashcardItem english="Drawstring Waist" chinese="抽绳腰部" pinyin="chōu shéng yāo bù" />
+                    <FlashcardItem english="Elastic Waist" chinese="松紧腰" pinyin="sōng jīn yāo" />
+                    <FlashcardItem english="Adjustable Straps" chinese="可调节肩带" pinyin="kě tiáo jié jiān dài" />
+                    <FlashcardItem english="Padded" chinese="带衬垫" pinyin="dài chèn diàn" />
+                    <FlashcardItem english="Non-padded" chinese="无衬垫" pinyin="wú chèn diàn" />
+                    <FlashcardItem english="Underwired" chinese="有钢圈" pinyin="yǒu gāng quān" />
+                    <FlashcardItem english="Wireless" chinese="无钢圈" pinyin="wú gāng quān" />
+                </ul>
+            </CategoryCard>
+        );
+
 
         function App() {
             const [currentPage, setCurrentPage] = React.useState('home'); // Use React.useState
@@ -910,6 +1108,18 @@
                         return <TraditionalClothingPage />;
                     case 'wedding-attire':
                         return <WeddingAttirePage />;
+                    case 'fabrics-materials':
+                        return <FabricsMaterialsPage />;
+                    case 'styles-fashion-trends':
+                        return <StylesFashionTrendsPage />;
+                    case 'pattern':
+                        return <PatternPage />;
+                    case 'weaving-method':
+                        return <WeavingMethodPage />;
+                    case 'fit-type':
+                        return <FitTypePage />;
+                    case 'operation-instruction':
+                        return <OperationInstructionPage />;
                     default:
                         return <HomePage onNavigate={setCurrentPage} />;
                 }
